@@ -1,0 +1,21 @@
+# build artifacts
+build/
+*.o
+*.exe
+*.dll
+
+# user data
+user/
+user_dev/
+
+# editor
+*.swp
+*.bak
+*.bak2
+*.bak3
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
