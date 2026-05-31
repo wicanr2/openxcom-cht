@@ -55,14 +55,19 @@ namespace OpenXcom
 		_btnPrev->setColor(Palette::blockOffset(1));
 		_btnNext->setColor(Palette::blockOffset(1));
 
-		// zh-TW UX fix v2 (designer pass): see ArticleStateCraft.cpp for full
-		// rationale. v1 picked idx 255 assuming it was the darkest entry, but
-		// in PAL_BATTLEPEDIA idx 255 is also #A4C068 pale lime (L=173.6) --
-		// invisible against sky imagery. v2 uses blockOffset(15)+9 = idx 249
-		// = #0C3054 dark navy (L=41.3) in PAL_BATTLEPEDIA. setHighContrast
-		// thickens AA so CJK strokes carry an outline against the sky.
-		_txtTitle->setColor(Palette::blockOffset(15)+9);
-		_txtTitle->setHighContrast(true);
+		// zh-TW UX fix v2 (designer pass, second iteration):
+		//
+		// IMPORTANT: ArticleStateCraftWeapon backgrounds (UP006-UP011.SPK) are
+		// near-BLACK weapon photos, not sky imagery. The dark ramp used in
+		// ArticleStateCraft (color=234) would render text dark-on-dark and
+		// vanish here. The original vanilla color blockOffset(14)+15 = 239
+		// renders pixels at PAL_BATTLEPEDIA idx 240..244 = #A0B8D8..#2C3C4C
+		// (pale blue gradient to dark blue), which is exactly the right
+		// contrast against a black background -- it is only the SKY-backed
+		// ArticleStateCraft screens that needed a redesign. Reverting here
+		// to vanilla so we do not regress craft-weapon readability while
+		// fixing the craft (Skyranger) screen.
+		_txtTitle->setColor(Palette::blockOffset(14)+15);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
 		_txtTitle->setText(tr(defs->title));
@@ -70,8 +75,7 @@ namespace OpenXcom
 		_txtInfo = new Text(310, 32, 5, 160);
 		add(_txtInfo);
 
-		_txtInfo->setColor(Palette::blockOffset(15)+9);
-		_txtInfo->setHighContrast(true);
+		_txtInfo->setColor(Palette::blockOffset(14)+15);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
 		_txtInfo->setText(tr(defs->text));
@@ -80,8 +84,7 @@ namespace OpenXcom
 		add(_lstInfo);
 
 
-		_lstInfo->setColor(Palette::blockOffset(15)+9);
-		_lstInfo->setHighContrast(true);
+		_lstInfo->setColor(Palette::blockOffset(14)+15);
 		_lstInfo->setColumns(2, 180, 70);
 		_lstInfo->setDot(true);
 		_lstInfo->setBig();
