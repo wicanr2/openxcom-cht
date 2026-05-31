@@ -143,13 +143,15 @@ Ship gate 全 PASS 條件：
 
 ## Glossary（台灣慣用譯名）
 
+> 📖 **完整 1994 第三波官方手冊譯名對照** 見 [`docs/GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md) — 含 200+ 條英中對照、衝突分析、後續修正建議。原始 PDF 收錄於 [`docs/DDSC-J-00120-遊戲手冊：幽浮１－地球防衛武力.pdf`](docs/)。
+
 ### X-COM 載具 / 兵種
 
-| English | 繁中 |
-|---|---|
-| Interceptor | 攔截機 |
-| Skyranger | 天空遊俠 |
-| Lightning / Avenger / Firestorm | 閃電 / 復仇者 / 風暴 |
+| English | 繁中 | 1994 第三波 |
+|---|---|---|
+| Interceptor | 攔截機 | 攔截機 ✓ |
+| Skyranger | 天空遊俠 | **運兵機** ⚠️ 1994 較佳，後續版本待改 |
+| Lightning / Avenger / Firestorm | 閃電 / 復仇者 / 風暴 | — |
 | Sectoid | 腦蟲 |
 | Snakeman | 蛇人 |
 | Ethereal | 靈體 |
@@ -160,8 +162,11 @@ Ship gate 全 PASS 條件：
 | Sectopod | 腦機甲 |
 | Cyberdisc | 電腦碟 |
 | Celatid / Silacoid | 盲蟲 / 矽生物 |
-| Plasma / Laser / Heavy | 電漿 / 雷射 / 重型 |
-| Cydonia | 賽多尼亞 |
+| Plasma / Laser / Heavy | 電漿 / 雷射 / 重型 | 電漿 / 雷射 / 重型 ✓ 全沿用 1994 |
+| Stingray (missile) | 刺尾 | **黃貂魚式飛彈** ⚠️ 1994 為正譯（魟），「刺尾」是誤譯 |
+| Avalanche (missile) | 雪崩 | 崩雪式飛彈 |
+| Medi-Kit | 醫療包 | 醫藥箱 |
+| Cydonia | 賽多尼亞 | — |
 
 ### TFTD（海底支線）
 
@@ -193,11 +198,13 @@ OpenXcom 本體繼承上游 GPL-3.0。Source patch 同樣 GPL-3.0。翻譯內容
 
 詳見 `docs/`：
 
+- [`GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md) — 1994 第三波官方手冊 vs 本專案譯名對照（200+ 條）
 - [`v2_plan.md`](docs/v2_plan.md) — 4 階段路線圖（v2.1 → v2.4）
 - [`v2_review.md`](docs/v2_review.md) — v2 全 round design review（1 356 keys）
 - [`SHIP_FINAL_V212.md`](docs/SHIP_FINAL_V212.md) — v2.12 ship final report
 - [`dev_round1_font_fix.md`](docs/dev_round1_font_fix.md) — Font ghost overlap 根因 re-diagnosis（不是 line step bug，是 image spacing:0）
 - [`trans_v23_batch1.md`](docs/trans_v23_batch1.md) — v2.3 round 117 條 UFOpedia 補翻
+- [`DDSC-J-00120-遊戲手冊：幽浮１－地球防衛武力.pdf`](docs/) — 1994 第三波官方繁中手冊原文（46 頁，30 MB；DDSC 數位化，非商業流傳）
 
 ## 已知 issues
 
@@ -213,6 +220,7 @@ OpenXcom 本體繼承上游 GPL-3.0。Source patch 同樣 GPL-3.0。翻譯內容
 - [OpenXcom](https://github.com/OpenXcom/OpenXcom) — 上游
 - [OpenXcom Extended (OXCE)](https://github.com/MeridianOXC/OpenXcom) — fork with hi-res mod support
 - [WQY Zen Hei](http://wenq.org/) — 字型來源
+- **1994 第三波官方繁中手冊**（DDSC-J-00120）— 譯名歷史對照基準，見 [`docs/GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md)
 - 完整 skill 細節：[`~/.claude/skills/openxcom-cht/SKILL.md`](https://github.com/wicanr2/openxcom-cht)（如果你也在用 Claude Code）
 
 PR / issue welcome — 特別是 v2.4 TFTD 長 narrative 補翻、字典統一、UI 排版 trade-off 改進。

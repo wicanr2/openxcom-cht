@@ -1,0 +1,376 @@
+                        英文速查表
+「幽浮」並不是個英文訊息很多的遊戲，在一般操作畫面中，甚至見不到多少單字。但是本著服務
+消費者的決心，第三波仍然盡量把遊戲中常見的英文單字找出來，放在本手冊內，希望對恐懼英文、
+懶得查字典的玩者有所幫助，並喜愛這個遊戲。
+
+依遊戲畫面分類
+
+■主畫面
+APR            四月           MAY          五月
+AUG            八月           MINS         MINUTES，分
+BASES          進入基地畫面       MONDAY       星期一
+DAY            天            NOV          十一月
+DEC            十二月          OCT          十月
+FEB            二月           OPTIONS      進入選項畫面
+FRIDAY         星期五          SATURDAY     星期六
+FUNDING        各國補助狀況列表     SECS         SECONDS，秒
+GRAPHS         觀看各項飛碟相關活動   SEP          九月
+               的統計資料圖表      SUNDAY       星期天
+HOUR           小時           THURSDAY     星期四
+INTERCEPT      派出攔截機        TUESDAY      星期二
+JAN            一月           UFOPAEDIA    幽浮百科，所有有關飛
+JUL            七月                        碟的相關資料
+JUN            六月           WEDNESDAY    星期三
+MAR            三月
+
+
+■攔截選單畫面
+BASE           基地           OUT          不在基地內
+CANCEL         取消命令         READY        備妥待命
+CRAFT          飛行器、飛機       REARMING     裝填武器中
+CREW           人員數          REFUELING    添加油料中
+HWP            重裝武器載具，如火箭   REPAIRING    修復中
+               坦克           SKYRANGER    運兵機
+INTERCEPTION   攔截           WEAPON       武裝數量
+INTERCEPTOR    攔截機
+LAUNCH         派出，發出
+
+
+■基地畫面
+ACCURACY       準確度          AMMO         彈藥、子彈
+AFRICA         非洲           ANTARCTICA   南極
+ALIEN          外星人          ARCTIC       北極
+ALLOCATED      已指定、指派       AREA         地區
+AMERICA        美洲           ARMOUR       防護設備、防具
+ARRIVAL        抵達         LARGE         大型
+ASIA           亞洲         LASER         雷射
+AUSTRALASIA    大洋洲(含澳洲)   LAUNCHER      發射器、發射架
+AUTO           自動、機動      LEFT          剩餘
+AVAILABLE      可用、待命      LIST          列表
+AVALANCHE      崩雪式飛彈      LIVING        居住
+BRAVERY        勇氣         LONG          長
+BUILD          建造         MAINTENANCE   維護、維持
+CANNON         砲          MANUFACTURE   生產、製造
+CAPTAIN        尉官         MEDI-KIT      醫藥箱
+CATEGORY       種類、類別、型式   MISSILE       飛彈
+CENTRA         中部         MONTHLY       每月
+CLIP           彈匣         MOTION        動靜、移動
+COLONEL        校官         NAME          姓名
+COMMANDER      指揮官        NEW           新
+CONTAINMENT    收容所        NEW           新的
+COST           建造成本       NONE          無
+CREW           隊員         NORTH         北部
+CURRENT        現有、目前      PACIFIC       太平洋
+DAMAGE         損壞情況       PER           每…
+DEFENSE        防衛         PERSONNEL     人員
+DESTINATION    目的地        PISTOL        手槍
+DETECTION      偵測         PRODUCE       生產、製造、產生
+EAST           東部         PRODUCTION    生產、製造、產生
+ELECTRO        電子式        PROGRESS      進展、進度
+ENGINEERS      工程師        PROJECT       專案、計劃
+EQUIP          裝備         PROXIMITY     觸動、接觸
+EQUIPMENT      裝備         PURCHASE      購買、採購
+EUROPE         歐洲         QUANTITY      量
+EXPLOSIVE      爆炸性        QUARTERS      地、地區、地方、空間
+FACILITIES     設施         RADAR         雷達
+FLARE          照明彈、火焰     RANGE         程、區
+FUEL           油料         RANK          階級
+FUNDS          剩餘基金       REACTIONS     反應度
+GENERAL        一般用途       RECRUIT       聘雇、招攬
+GEOSCAPE       回到地球畫面     RENTAL        承租金
+GEOSCAPE       地球、地球儀     RESEARCH      研究、研發、開發
+GRENADE        手榴彈        RIFLE         來福槍
+HANGARS        停機棚        ROD           棍、棒
+HEALTH         健康         ROOKIE        新兵、見習生、菜鳥
+HEAVY          重型         ROUNDS        砲排、一輪砲彈
+HIGH           高          SACK          解散、革職
+HIRE           雇用         SCANNER       掃瞄、掃瞄儀
+INCENDIARY     燃燒、燒夷      SCIENTISTS    科學家
+INCOME         收入         SELECT        選擇
+INFORMATION    資訊、資料      SELL          賣掉
+ITEM           項目         SERGENT       士官
+LABORATORIES   實驗室        SHELL         砲彈
+SHORT         短          STORES        儲藏、儲存、倉庫
+SIBERIA       西伯利亞       STRENGTH      力、力量
+SITE          地點、地區      STUN          暈倒
+SKILL         技巧         SYSTEM        系統
+SMALL         小型         TANK          坦克
+SMOKE         煙、發煙、煙幕    TERRORIST     恐怖份子
+SOLDIERS      士兵、戰士      TIME          時間
+SOUTH(ERN)    南部         TOTAL         全部
+SPACE         空間、空位      TRANSFER      轉移、運送
+SQUAD         隊伍、班       UNITS         單位
+SQUADDIE      班兵         USED          已使用
+STAMINA       活力         VALUE         價值、價格
+STATUS        狀況         WORKSHOP      工作室、工廠
+STINGREY      黃貂魚式飛彈
+
+
+■統計圖表畫面
+ACTIVITY      活動         GERMANY       德國
+AFRICA        非洲         INDIA         印度
+ATLANTIC      大西洋        INDIAN        印度
+AUSTRALIA     澳洲         ITALY         義大利
+BALANCE       損益平衡狀況     JAPAN         日本
+BAZIL         巴西         MAINTENANCE   維護費用
+CANADA        加拿大        NIGERIA       奈及利亞
+CHINA         中國         OCEAN         洋
+COUNTRIES     國家         RUSSIA        俄羅斯
+EGYPT         埃及         SCORE         評價、計分
+EXPENDITURE   開支狀況       SPAIN         西班牙
+FINANCE       財務狀況       UK            英國
+FRANCE        法國         USA           美國
+
+
+■幽浮百科畫面
+ACCESS        存取、取用、接觸   LIFE          生命
+ARMAMENT      武器裝備       LIFT          電梯、裝置
+ARTEFACTS     加工物、合成品    PLATFORM      載台、載具、平台
+COMPONENTS    元件、零件、物品   UFO           Unidentified Flying
+FORMS         型態、類別                    Object 不明飛行物體
+
+
+■選項畫面
+ABANDON       放棄、離開      LOAD          載入
+GAME          遊戲         SAVE          儲存
+■補助狀況列表畫面
+CHANGE       改變         INTERNATIONAL   國際
+FUNDING      資助         RELATIONS       關係
+
+
+■地面戰鬥畫面
+
+ABORT        中止、放棄      MISSING         行蹤不明
+ACC          準確度        MISSION         任務
+ACTION       行動任務       MORE            多餘、剩餘
+AIM          瞄準         MOVEMENT        移動
+ALREADY      已經         OPERATIVES      活動人員、隊員
+AMMUNITION   彈藥         OUTSIDE         在…之外
+AUTO         自動         PACK            包
+BACK         背          PANICK          驚恐、嚇破膽
+BECOME       變成、導致      POOR            不佳
+BERSERK      發狂         PRIME           啟動引信
+CAPTURE      捕捉         RATING          評價、評分
+CONTROL      控制         RESERVED        保留給…
+CRAFT        飛機、飛行器     RIGHT           右邊
+DIE          死          SCROLL          捲動
+ENOUGH       足夠         SHOT            射擊
+EXCELLENT    極好         SHOULDER        肩膀
+EXIT         脫離、離開      SNAPSHOT        快速射擊
+FATAL        致命的        SPEED           速度
+FIRE         發射         TERRIBLE        可怕、極慘
+GOOD         不錯         THERE           那裡
+GROUND       地面         THROW           丟擲
+HAND         手          TRIGGER         觸動、啟始
+KILLED       被殺         TYPE            型態
+LEFT         左邊         UNABLE          不能，無法，不允許
+LEG          腿          UNCONCIOUS      不醒人事
+LIVE         活的         UNDER           在…之下
+LOADED       已裝填彈藥      WOUND           傷
+LOST         損失、失去      WRONG           錯誤的
+
+
+
+綜合列表
+ABANDON      放棄、離開      ALIEN           外星人
+ABORT        中止、放棄      ALLOCATED       已指定、指派
+ACC          準確度        ALREADY         已經
+ACCESS       存取、取用、接觸   ALTITUDE        高度
+ACCURACY     準確度        AMERICA         美洲
+ACTION       行動、任務      AMMO            彈藥、子彈
+ACTIVITY     活動         AMMUNITION      彈藥
+AFRICA       非洲         AMP             放大器
+AIM          瞄準         ANTARCTICA      南極
+ANTI          反…         DAMAGE          損壞情況
+APR           四月         DAY             天
+ARCTIC        北極         DEC             十二月
+AREA          地區         DEFENSE         防衛
+ARMAMENT      武器裝備       DESTINATION     目的地
+ARMOUR        防護設備、防具    DETECTION       偵測
+ARRIVAL       抵達         DIE             死
+ARTEFACTS     加工物、合成品    EARTH           地球
+ASIA          亞洲         EAST            東部
+ATLANTIC      大西洋        EGYPT           埃及
+AUG           八月         ELECTRO         電子式
+AUSTRALASIA   大洋洲(含澳洲)   ELERIUM         稀有元素
+AUSTRALIA     澳洲         ENGINEERS       工程師
+AUTO          自動、機動      ENOUGH          足夠
+AVAILABLE     可用、待命      ENTERTAINMENT   玩具、娛樂
+AVALANCHE     崩雪式飛彈      EQUIP           裝備
+AVERAGE       平均         EQUIPMENT       裝備
+BACK          背          EUROPE          歐洲
+BALANCE       損益平衡狀況     EXCELLENT       極好
+BASE          基地         EXIT            離開
+BAZIL         巴西         EXPENDITURE     開支狀況
+BECOME        變成、導致      EXPLOSIVE       爆炸性
+BERSERK       發狂         FACILITIES      設施
+BOMB          彈、炸彈       FATAL           致命的
+BRAVERY       勇氣         FEB             二月
+BUILD         建造         FINANCE         財務狀況
+CANADA        加拿大        FIRE            發射
+CANCEL        取消命令       FLAME           火、火燄
+CANNON        砲          FLARE           照明彈、火焰
+CAPTAIN       尉官         FLYING          飛行
+CAPTURE       捕捉         FORMS           型態、類別
+CATEGORY      種類、類別、型式   FRANCE          法國
+CENTRA        中部         FRIDAY          星期五
+CHANGE        改變         FUEL            油料
+CHINA         中國         FUNDING         各國補助狀況列表
+CLIP          彈匣         FUNDING         資助
+COLONEL       校官         FUNDS           剩餘基金
+COMMANDER     指揮官        GAME            遊戲
+COMPONENTS    元件、零件、物品   GENERAL         一般用途
+COMPUTER      電腦         GEOSCAPE        地球、地球儀
+CONTAINMENT   收容所        GEOSCAPE        回到地球書面
+CONTROL       控制         GERMANY         德國
+CORPSE        屍體、殘骸      GOOD            不錯
+COST          建造成本       GOVERMENT       政府
+COUNTRIES     國家         GRAPHS          觀看各項飛碟相關活動
+CRAFT         飛行器、飛機                     的統計資料圖表
+CREW          隊員         GRAVITY         動
+CURRENT       現有、目前      GRENADE         手榴彈
+GROUNT          地面           MARTIAN      火星的
+HAND            手            MAY          五月
+HANGARS         停機棚          MEDI-KIT     醫藥箱
+HEALTH          健康           MIND         心靈
+HEAVY           重型           MINS         MINUTES，分
+HIGH            高            MISSILE      飛彈
+HIRE            雇用           MISSING      行蹤不明
+HOUR            小時           MISSION      任務
+HWP             重裝武器載具，如火箭   MONDAY       星期一
+                坦克           MONTHLY      每月
+HYPER           超…           MORE         多餘
+INCENDIARY      燃燒、燒夷        MOTION       動靜、移動
+INCOME          收入           MOVEMENT     移動
+INDIA           印度           NAME         姓名
+INDIAN          印度           NAVIGATOR    領航員
+INFORMATION     資訊、資料        NEW          新的
+INTERCEPT       派出攔截機        NIGERIA      奈及利亞
+INTERCEPTION    攔截           NONE         無
+INTERCEPTOR     攔截機          NORTH        北部
+INTERNATIONAL   國際           NOV          十一月
+ITALY           義大利          OCEAN        洋
+ITEM            項目           OCT          十月
+JAN             一月           OFFICIAL     官方
+JAPAN           日本           OPERATIVES   活動人員、隊員
+JUL             七月           OPTIONS      進入選項畫面
+JUN             六月           OUT          不在基地內
+KILLED          被殺           PACIFIC      太平洋
+LABORATORIES    實驗室          PACK         包
+LARGE           大型           PANICK       驚恐
+LASER           雷射           PER          每…
+LAUNCH          派出，發出        PERSONNEL    人員
+LAAUNCHER       發射器、發射架      PISTOL       手槍
+LEADER          領導           PLASMA       電漿
+LEFT            剩餘           PLATFORM     載台、載具、平台
+LEG             腿            POOR         不佳
+LIFE            生命           POWER        力、威力
+LIFT            電梯、裝置        PRIME        啟動引信
+LIST            列表           PROBE        球
+LIVE            活的           PRODUCE      生產、製造、產生
+LIVING          居住           PRODUCTION   生產、製造、產生
+LOAD            載入           PROGRESS     進展、進度
+LOADED          已裝填彈藥        PROJECT      專案、計劃
+LONG            長            PROXIMITY    觸動、接觸
+LOST            損失、失去        PURCHASE     購買、採購
+MAINTENANCE     維護、維持        QUANTITY     量
+MAINTENANCE     維護費用         QUARTERS     地、地區、地方、空間
+MANUFACTURE     生產、製造        RADAR        雷達
+MAR             三月           RANGE        程、區
+RANK         階級          SPACE        空間、空位
+RATING       評價、評分       SPAIN        西班牙
+REACTIONS    反應度         SPEED        速度
+READY        備妥待命        SQUAD        隊伍、班
+REARMING     裝填武器中       SQUADDIE     班兵
+RECRUIT      聘雇、招攬       STAMINA      活力
+REFUELING    添加油料中       STATUS       狀況
+RELATIONS    關係          STINGREY     黃貂魚式飛彈
+RENTAL       承租金         STORES       儲藏、儲存、倉庫
+REPAIRING    修復中         STRENGTH     力、力量
+RESEARCH     研究、研發、開發    STUN         暈倒
+RESERVED     保留給…        SUIT         衣、裝
+RIFLE        來福槍         SUNDAY       星期天
+RIGHT        右邊          SUPPLY       補給
+ROD          棍、棒         SYSTEM       系統
+ROOKIE       新兵、見習生、菜鳥   TANK         坦克
+ROUNDS       砲排、一輪砲彈     TERRIBLE     可怕、極慘
+RUSSIA       俄羅斯         TERRORIST    恐怖份子
+SACK         解散、革職       THERE        那裡
+SATURDAY     星期六         THROW        丟、擲
+SAVE         儲存          THURSDAY     星期四
+SCANNER      掃瞄、掃瞄儀      TIME         時間
+SCIENTISTS   科學家         TOTAL        全部
+SCORE        評價、計分       TOUHG        硬、粗
+SCOUT        偵查艇         TRANSFER     轉移、運送
+SCROLL       捲動          TRIGGER      觸動、啟始
+SECS         SECONDS，秒   TUESDAY      星期二
+SELECT       選擇          TYPE         型態
+SELL         賣掉          UFO          Unidentified Flying
+SEP          九月                       Object 不明飛行物體
+SERGENT      士官          UFOPAEDIA    幽浮百科，所有有關飛
+SHELL        砲彈                       碟的相關資料
+SHIELD       防護罩         UK           英國
+SHIP         船、艦         UNABLE       不能，無法
+SHORT        短           UNCONCIOUS   不醒人事
+SHOT         擊           UNDER        在…之下
+SHOULDER     肩膀          UNITS        單位
+SIBERIA      西伯利亞        UNKNOWN      未知、不明
+SITE         地點、地區       USA          美國
+SKILL        技巧          USED         已使用
+SKIN         皮           VALUE        價值、價格
+SKYRANGER    運兵機         WAVE         電波
+SMALL        小型          WEAPON       武裝數量
+SMOKE        煙、發煙、煙幕     WEDNESDAY    星期三
+SNAPSHOT     快速射擊        WORKSHOP     工作室、工廠
+SOLDIERS     士兵、戰士       WOUND        傷
+SOLUTION     方案、計劃       WRONG        錯誤的
+SOUTH(ERN)   南部
+                  文件分類：         J           文件編號： 00120              文件批號： 00
+
+文件名稱：           幽浮１－地球防衛武力電腦遊戲手冊
+
+                                        製           作       群
+原 稿 掃 圖                                             原稿圖文分離
+原 稿 辨 識                                             文稿成品輸出
+文 稿 編 輯                                             文 稿 整 合
+特別感謝名單
+
+
+                                文       件       完       成   日    期
+初      版 2009-02-26            再 版 ／ 修 訂 版                           其 他 加 註
+
+                                        文       件       來   源
+原 圖 書 書 名    幽浮１－地球防衛武力手冊
+原 圖 書 作 者 原 著 MICROPROSE                                    編／譯者     阮建成
+原 圖 書 出 版 者 第３波文化事業股份有限公司                                            原圖書出版日 民國
+
+                               文        件       版   權       宣    告
+              本文件版權屬原輸出公司、出版社、圖書公司或原著作人
+            所有，作商業用途者請自行洽上述公司，本文件僅可在非商業
+            上流傳或供私人收集資料用。另由於資料老舊，DDSC 不對原
+            書內的內容負責，且除了更正原書內的錯字、漏字之外一切照
+            原書內容。
+
+                                檔       名       格       式   說    明
+       DDSC －    文件分類       －       文件編號        －       文件批號     － 文件名.PDF
+
+      以 DDSC 為起頭，加上１個字母為分類代碼，再加上以５位數由 00001 起的編號，加上２位數由 01
+    起的編號，加上完整的文件名稱而成的。
+      其中分類代碼詳見下面列表。文件批號指該文件為非合訂版的，可能因書的內容過多而分批完成的，
+    此項可有可無。
+
+
+                           文    件       分       類       代   碼    說    明
+                      代碼            類       別               代碼       類    別
+                      A    小說／文學類文章                         B         娛樂類
+                      C      天文類                            D         科學類
+                      E     古文明事物類                          F        自然界類
+                      G     古怪事物類                           H        動／植物類
+                      I      電子類                            J         電腦類
+                      K     教育／教學類
+
+
+
+             Documents Digitize Service Center 製作
+                          1998-2009
+
