@@ -1,34 +1,355 @@
-# OpenXcom 繁體中文化（zh-TW）
+# OpenXcom 繁體中文化專案
+
+> *X-COM: UFO Defense* (1994 MicroProse) — 完整繁體中文化  
+> 2 513 翻譯鍵 ✦ WQY Sharp 12px 點陣字型 ✦ 5 個 source patch ✦ 1994 第三波官方手冊譯名對照 ✦ Windows ZIP + Linux AppImage
 
 [![Ship gate](https://img.shields.io/badge/ship_gate-PASS_3%2F3-brightgreen)]()
 [![Coverage](https://img.shields.io/badge/coverage-common_102%25_%2F_xcom1_102%25_%2F_xcom2_84%25-blue)]()
 [![Keys](https://img.shields.io/badge/translation_keys-2513-orange)]()
 [![License](https://img.shields.io/badge/license-GPL--3.0-blueviolet)]()
 
-> [OpenXcom](https://github.com/OpenXcom/OpenXcom)（1994 經典策略遊戲 X-COM: UFO Defense 的開源重寫）的**繁體中文化專案**，包含字型、翻譯、UI patch、TFTD 海底支線。
+---
 
-## Upstream
+## 目錄
 
-| 項目 | 來源 |
-|---|---|
-| **上游專案** | [github.com/OpenXcom/OpenXcom](https://github.com/OpenXcom/OpenXcom) (master) |
-| **Fork 基準 commit** | `1edb0a5a` (2024-2025 era master) |
-| **Upstream license** | GPL-3.0-or-later |
-| **Patches 數量** | 5 個 `.cpp`（最小化原則，全在 `patches/src/`） |
-| **本地 build 位置** | `D:\openxcom\OpenXcom\` (含 v2.18 patched source) |
-
-本專案不 fork 上游、不 maintain 平行分支 — 只發佈 5 個獨立 patch 檔，
-任何人可在乾淨的 OpenXcom master clone 上覆蓋這 5 檔重新 build。
+1. [一句話說清楚（Hero）](#hero)
+2. [快速開始（Quick Start）](#quick-start)
+3. [為何要漢化 X-COM？](#why)
+4. [X-COM 戰史 — 從 1994 到 OpenXcom](#xcom-history)
+5. [戰役流程 — 太空監視到火星終局](#campaign-flow)
+6. [兵種與軍階 — 從菜鳥到指揮官](#ranks)
+7. [武器階層 — 來福槍到電漿光束](#weapons)
+8. [外星人圖鑑 — 七種族與恐怖單位](#aliens)
+9. [世界地理 — 五大洲與基地選址](#geography)
+10. [實機截圖展示](#screenshots)
+11. [1994 第三波中文化先行者](#pioneers-1994)
+12. [Technical Deep Dive](#technical-deep-dive)
+13. [Upstream & Patches](#upstream)
+14. [License & Credits](#credits)
 
 ---
 
-## 截圖
-
-**v2.19 — 主選單作者簽名（chibi pixel art）**
+<a name="hero"></a>
+## 🛸 OpenXcom 繁中版 — 以母語指揮地球防衛武力
 
 ![signature_main_menu](screenshots/signature_main_menu.png)
+*主選單繁體中文化，右下角是「原來是個胖仔 / wicanr2」chibi pixel art 簽名*
 
-右下角是「原來是個胖仔 / wicanr2」的 8-bit pixel art 簽名 (48×24 paletted，4x scale 後 192×96 px)。用 GEOSCAPE palette block 14 (橄欖→暗棕) + idx 32 (亮綠眼鏡點綴)，跟 X-COM vintage UI 視覺一致。
+這是 **X-COM: UFO Defense（1994 MicroProse Julian Gollop）** 的完整繁體中文化版本，基於開源重寫專案 [OpenXcom](https://github.com/OpenXcom/OpenXcom)。
+
+| 項目 | 狀態 |
+|------|------|
+| common UI / 基礎介面 | **437 / 427 = 102%** |
+| xcom1（UFO Defense 主線） | **1 101 / 1 075 = 102%**（含 UFOPEDIA 長段落） |
+| xcom2（TFTD 海底支線） | **975 / 1 166 = 84%** |
+| 字型 | WQY Zen Hei Sharp **12 px embedded bitmap**（Apache 2.0 / GPL） |
+| Source patches | **5 個 `.cpp`**（Font / Options / Geoscape clock / UFOpedia 配色 / 簽名） |
+| 平台 | Windows 10/11 64-bit + Linux x86_64 + WSL |
+| GitHub | [wicanr2/openxcom-cht](https://github.com/wicanr2/openxcom-cht) |
+
+---
+
+<a name="quick-start"></a>
+## ⚡ 快速開始
+
+### 方式 0：整包獨立版（最簡單，雙平台）
+
+不必 build、不必裝 Steam、不必裝 runtime — **整包雙擊就跑**。
+
+| 平台 | 檔名 | 大小 | 啟動 |
+|---|---|---|---|
+| Windows 10/11 64-bit | `OpenXcom-CHT-v2.19-portable.zip` | 8.11 MB | 解壓後雙擊 `OpenXcom-CHT.cmd` |
+| Linux x86_64 | `OpenXcom-CHT-v2.19-x86_64.AppImage` | 16 MB | `chmod +x *.AppImage && ./OpenXcom-CHT-v2.19-x86_64.AppImage` |
+
+**內含**：openxcom EXE + 全部 runtime（Win 20 個 DLL；Linux 57 個 .so）+ 翻譯資產 + 字型 + X-COM 1 原始遊戲資料（10 MB）+ portable launcher + 預設 zh-TW + 1280×800 設定。
+
+Linux AppImage 走 XDG 路徑（`$XDG_DATA_HOME/openxcom-cht/` 與 `$XDG_CONFIG_HOME/openxcom-cht/`），不污染 OS。
+
+> ⚠️ 整包版內含 X-COM 原版遊戲資料（10 MB），版權屬 MicroProse / 2K Games，**僅供已擁有正版 Steam X-COM 1 的玩家私人保存使用，不可公開散布**。本 GitHub repo 本身**不**提供整包下載，要自製請走方式 B + `tools/make_portable.ps1`。
+
+### 方式 A：把翻譯資產 drop 進現成 OpenXcom
+
+```bash
+git clone https://github.com/wicanr2/openxcom-cht
+cp -r openxcom-cht/bin/common/Language/*    /path/to/OpenXcom/data/common/Language/
+cp    openxcom-cht/bin/standard/xcom1/Language/zh-TW.yml  /path/to/OpenXcom/data/standard/xcom1/Language/
+cp    openxcom-cht/bin/standard/xcom2/Language/zh-TW.yml  /path/to/OpenXcom/data/standard/xcom2/Language/
+# 在遊戲 Options > Language 切到 zh-TW
+```
+
+**注意**：方式 A 用 vanilla EXE，沒有 5 個 source patch，所以時鐘 widget 重疊、UFOpaedia 文字色等問題仍存在。要完整體驗請走方式 B。
+
+### 方式 B：從 source 重 build（含全部 patch）
+
+```bash
+# Linux
+git clone https://github.com/OpenXcom/OpenXcom /tmp/openxcom-src && cd /tmp/openxcom-src
+cp /path/to/openxcom-cht/patches/src/**/*.{cpp,h} src/  # 5 patches
+cp -r /path/to/openxcom-cht/bin/* bin/
+mkdir build && cd build && cmake .. && make -j$(nproc)
+```
+
+```powershell
+# Windows VS 2022 Build Tools
+set CL=/utf-8    # 重要：cp950 系統避免 C2001
+cmake --build build-win64-release --config Release
+```
+
+---
+
+<a name="why"></a>
+## ✨ 為何要漢化 X-COM？
+
+1994 年，英國設計師 Julian Gollop 在 MicroProse 推出《**X-COM: UFO Defense**》。這款遊戲開創「**戰略+戰術雙層 RPG**」類型：玩家在 Geoscape 全球視角管理基地經濟、攔截 UFO；UFO 墜落後切換到 turn-based 戰術地圖，指揮 8-16 名特工執行回收任務。
+
+1994 年，台灣**第三波文化**（Third Wave）出版了官方繁體中文版《幽浮１—地球防衛武力》遊戲手冊（46 頁）。譯者**阮建成**為這款遊戲建立了 200+ 條中文譯名的詞彙基礎：**幽浮、攔截機、運兵機、雪崩式飛彈、電漿、心靈、收容所、指揮官**……這些詞 30 年後仍是繁中圈通用譯名。
+
+但官方手冊只覆蓋「英文速查表」(p.1-15)，遊戲內介面、UFOPEDIA 全文、外星人物種名、TFTD 海底支線等核心內容，1994 年的玩家只能憑英文硬玩。
+
+**三十年後，這個專案想做的事**：
+
+讓 2026 年的中文玩家，以母語讀到攔截機派遣指令、UFO 墜落地點報告、外星人解剖筆記，以及那句經典台詞——「**指揮官，我們的研究員找到一些有趣的東西⋯⋯**」
+
+> 「**指揮官**，X-COM 計畫的成敗，就交給您了。地球的命運懸於一線。」  
+> — 1994 X-COM 開場字幕（繁中譯本）
+
+---
+
+<a name="xcom-history"></a>
+## 📜 X-COM 戰史 — 從 1994 到 OpenXcom
+
+### 第一紀：Gollop 三部曲（1994–1997）
+
+| 年份 | 作品 | 主題 |
+|------|------|------|
+| **1994** | **X-COM: UFO Defense** | 地表戰爭：攔截 UFO、地面戰鬥、研究/生產／火星 Cydonia 終局 |
+| 1995 | X-COM: Terror from the Deep（TFTD） | 海底戰爭：海面/水下雙艙、深海種族對抗 |
+| 1997 | X-COM: Apocalypse | 城邦戰爭：實時戰術 + 多公司政治 |
+
+三作主題遞進：**地球**（地表）→ **海洋**（深海）→ **城市**（後現代）。Gollop 用一個 IP 涵蓋三種「人類視角下的他者入侵」。
+
+### 第二紀：商業沉寂與盜版漢化（1998–2008）
+
+MicroProse 被 Hasbro 收購、X-COM 系列暫停。1994 第三波官方手冊絕版，但**坊間流傳的 Big5 內存 patcher**（俗稱「DOS 版幽浮中文化」）讓 90 後 OS Windows 95/98 玩家仍能繼續玩繁中。
+
+### 第三紀：開源重寫（2009–）
+
+2009 年葡萄牙工程師 **SupSuper** 發起 [OpenXcom](https://github.com/OpenXcom/OpenXcom) 計畫：用 C++ 從零重寫 1994 原作邏輯，支援高解析度、模組系統、多平台。2014 年 OpenXcom 1.0 正式版發佈。2017 年衍生 [OpenXcom Extended (OXCE)](https://github.com/MeridianOXC/OpenXcom)，加入 hi-res mod / 進階戰術選項。
+
+**本專案基於 vanilla OpenXcom**，commit `1edb0a5a`（2024-2025 era master），目標是「**最小侵入 + 1994 第三波譯名傳承 + 現代視覺修正**」。
+
+### 第四紀：2012 Firaxis 重啟（番外）
+
+2012 年 Firaxis Games 推出《XCOM: Enemy Unknown》3D 重啟，2016 年續作《XCOM 2》。**現代版與 1994 原作邏輯/UI/平衡完全不同，本專案不涉及 Firaxis 版本**。
+
+---
+
+<a name="campaign-flow"></a>
+## 🎯 戰役流程 — 太空監視到火星終局
+
+X-COM 是一款**戰略+戰術雙層**遊戲。一次完整戰役通常持續 **遊戲內 6-12 個月**（玩家實時約 40-80 小時）。
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Geoscape（地球視角）— 戰略層                                │
+│  ├── 雷達偵測 UFO                                            │
+│  ├── 派攔截機追擊                                            │
+│  ├── 16 國月補助 → 收入                                       │
+│  └── UFO 墜落／降落 → 進入戰術層                              │
+└───────────────────┬─────────────────────────────────────────┘
+                    │
+        ┌───────────▼───────────┐
+        │  攔截戰（dogfight）    │  飛彈/光束對 UFO 護甲
+        │  60 秒內擊落或撤退      │
+        └───────────┬───────────┘
+                    │
+        ┌───────────▼─────────────────────────────────────────┐
+        │  Battlescape（戰術層）— 8-26 名特工 turn-based      │
+        │  ├── 探索墜落點 / 城市恐怖任務 / UFO 基地            │
+        │  ├── 回收外星武器、屍體、活俘                        │
+        │  └── 撤離 → 結算                                     │
+        └───────────┬─────────────────────────────────────────┘
+                    │
+        ┌───────────▼─────────────────────────────────────────┐
+        │  Basescape（基地管理）                              │
+        │  ├── 實驗室：研究外星科技                            │
+        │  ├── 工作室：生產武器                                │
+        │  ├── 收容所：審訊活俘 → 解鎖科技樹                   │
+        │  └── 機庫：補充攔截機 / 運兵機                       │
+        └───────────┬─────────────────────────────────────────┘
+                    │
+              （循環回 Geoscape）
+                    │
+                    ▼
+        ┌────────────────────────────────────────┐
+        │  終局：突襲火星 Cydonia / 賽多尼亞      │
+        │  兩階段戰：火星表面 → 外星人大腦核心    │
+        └────────────────────────────────────────┘
+```
+
+每個月底 16 國理事會評分。連續兩月評分過低 → 國家退出資助 → 收入崩潰 → Game Over。
+
+> 「**幽浮並不是個英文訊息很多的遊戲**，在一般操作畫面中，甚至見不到多少單字。」  
+> — 第三波《幽浮１》手冊開場白
+
+---
+
+<a name="ranks"></a>
+## 🎖️ 兵種與軍階 — 從菜鳥到指揮官
+
+X-COM 特工從 **新兵（ROOKIE）** 起步，戰場表現累積經驗，自動晉升六階軍階。
+
+| 英文 | 1994 第三波 | 本專案 | 角色定位 |
+|---|---|---|---|
+| ROOKIE | 新兵、見習生、菜鳥 | **新兵** | 起始職等，反應差、易死 |
+| SQUADDIE | 班兵 | **下士** | 第一次晉升 |
+| SERGEANT | 士官 | **中士** | 統帥小隊 |
+| CAPTAIN | 尉官 | **上尉** | 中階軍官 |
+| COLONEL | 校官 | **上校** | 高階軍官 |
+| COMMANDER | 指揮官 | **指揮官** | 全戰場最高指揮，**僅一人** |
+
+> **歷史差異**：1994 第三波採「兵 / 士官 / 尉官 / 校官」中華軍制體系；本專案依 OpenXcom 社群慣例採「下士 / 中士 / 上尉 / 上校」精確對應。兩者皆通，現行更精準。
+
+### 戰士屬性（X-COM 6 大數值）
+
+| 英文 | 1994 | 本專案 | 影響 |
+|---|---|---|---|
+| HEALTH | 健康 | **生命值** | HP，受傷消耗 |
+| STAMINA | 活力 | **耐力** | 衝刺/疾跑可用 TU |
+| BRAVERY | 勇氣 | **勇氣** | 抗驚恐/狂暴 |
+| REACTIONS | 反應度 | **反應** | 自動射擊觸發概率 |
+| FIRING ACC | ACC | **射擊準確度** | 命中率 |
+| STRENGTH | 力 | **力量** | 負重 + 投擲距 |
+
+外加 **TIME UNITS（行動點）**，每回合可動點數。
+
+---
+
+<a name="weapons"></a>
+## 🔫 武器階層 — 來福槍到電漿光束
+
+X-COM 武器分**三代**，研究外星屍體與裝備後逐層解鎖。
+
+### 第一代：地球工業武器（起始裝備）
+
+| 英文 | 1994 第三波 | 本專案 |
+|---|---|---|
+| PISTOL | 手槍 | **手槍** |
+| RIFLE | **來福槍** | 步槍 |
+| HEAVY CANNON | 重砲（重 + 砲）| **重型加農炮** |
+| AUTO CANNON | 自動砲 | **自動加農炮** |
+| GRENADE | 手榴彈 | **手榴彈** |
+| SMOKE GRENADE | 煙幕彈 | **煙霧彈** |
+| HIGH EXPLOSIVE | 爆炸性 | **高爆炸藥** |
+| ROCKET LAUNCHER | 火箭發射器 | **火箭發射器** |
+
+### 第二代：雷射科技（研究 LASER WEAPONS 後解鎖）
+
+雷射武器不需彈藥，但前期研究成本高、後期被電漿淘汰。
+
+| 英文 | 譯名 |
+|---|---|
+| LASER PISTOL | 雷射手槍 |
+| LASER RIFLE | 雷射步槍（1994: 雷射來福） |
+| HEAVY LASER | 重型雷射 |
+
+### 第三代：電漿科技（捕獲外星活體後解鎖）
+
+| 英文 | 譯名 |
+|---|---|
+| PLASMA PISTOL | 電漿手槍 |
+| PLASMA RIFLE | 電漿步槍 |
+| HEAVY PLASMA | 重型電漿 |
+| **PLASMA** | **電漿** ✓ 1994 與本專案同 — 32 年來繁中圈一致 |
+
+### 飛彈系統（攔截機武裝）
+
+| 英文 | 1994 第三波 | 本專案 | 備註 |
+|---|---|---|---|
+| STINGRAY | **黃貂魚式飛彈** | 刺尾 | ⚠️ 1994 譯名正確（魟魚），本專案誤譯待修 |
+| AVALANCHE | 崩雪式飛彈 | **雪崩** | 雙方皆通 |
+| CANNON | 砲 | **加農炮 / 機炮** | 字型限制改「炮」字 |
+| FUSION BALL | 融合彈 | **融合彈** | 終極外星武器 |
+
+完整 200+ 條譯名對照見 [`docs/GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md)。
+
+---
+
+<a name="aliens"></a>
+## 👽 外星人圖鑑 — 七種族與恐怖單位
+
+### 七大智慧種族
+
+每個種族都有「士兵 / 領航員 / 工程師 / 醫療兵 / 領袖 / 指揮官」六個軍階（部分種族缺工程師或領導）。捕獲對應軍階解鎖不同科技樹。
+
+| 英文 | 譯名 | 特性 |
+|---|---|---|
+| SECTOID | **腦蟲** | 灰色小型外星人，心靈攻擊 |
+| FLOATER | **浮游者** | 浮空種族，輕甲 |
+| SNAKEMAN | **蛇人** | 蜿蜒爬行，戰鬥力高 |
+| MUTON | **巨型怪** | 重甲近戰 |
+| ETHEREAL | **靈體** | 全種族最強心靈，肉身脆弱 |
+| CELATID | **盲蟲** | 化學噴吐 |
+| SILACOID | **矽生物** | 移動的火焰 |
+
+### 恐怖單位（無領袖階層的戰場生物）
+
+| 英文 | 譯名 | 屬於 |
+|---|---|---|
+| CHRYSSALID | **蟹形蟲** | 蛇人 — 一擊變屍體 + 生出新蟹蟲 |
+| ZOMBIE | **喪屍** | 蟹蟲攻擊副產物 |
+| REAPER | **收割者** | 浮游者 — 雙顎重型生物 |
+| CYBERDISC | **電腦碟** | 腦蟲 — 自動化飛碟 |
+| SECTOPOD | **腦機甲** | 靈體 — 強雷射機械生物 |
+
+> 1994 第三波手冊未提供種族專名（因英文原版本身畫面不顯式命名），本專案譯名為**社群慣例 + 字形相容性**考量。
+
+完整外星科技樹（UFOPEDIA）見遊戲內 UFOPAEDIA > ALIEN LIFE FORMS。
+
+---
+
+<a name="geography"></a>
+## 🌍 世界地理 — 五大洲與基地選址
+
+X-COM 把地球分**五大洲 + 16 個國家**，每月每國根據你的表現提供補助金。
+
+### 五大洲補助結構
+
+| 英文 | 1994 第三波 | 本專案 | 初始月補助 |
+|---|---|---|---|
+| AMERICA / USA | 美洲 / 美國 | **美洲 / 美國** | $850 K |
+| EUROPE | 歐洲 | **歐洲** | $800 K |
+| ASIA | 亞洲 | **亞洲** | $700 K |
+| AFRICA | 非洲 | **非洲** | $400 K |
+| AUSTRALASIA | **大洋洲（含澳洲）** | **大洋洲** | $400 K |
+
+### 16 個資助國（依手冊順序）
+
+USA、UK、FRANCE、GERMANY、ITALY、SPAIN、RUSSIA、JAPAN、CHINA、INDIA、CANADA、BRAZIL、EGYPT、NIGERIA、SOUTH AFRICA、AUSTRALIA。
+
+### 基地選址策略（1994 手冊未明寫，社群經驗）
+
+| 區域 | 優勢 | 劣勢 |
+|---|---|---|
+| 北美中部（USA 中央）| 雷達覆蓋 USA + 加拿大 | UFO 大西洋繞道 |
+| 歐洲（德法交界）| 涵蓋歐洲補助大戶 | 西伯利亞 UFO 接近遲 |
+| 中東（埃及/沙烏地）| 雷達覆蓋三洲 | 補助較低 |
+| 東南亞（菲律賓附近）| 太平洋 UFO 攔截 | 遠離歐美 |
+| **南極（ANTARCTICA）** | 無國家收入 | 戰略樞紐，後期需要 |
+
+> 1994 手冊把澳洲歸「大洋洲(含澳洲)」— 這是 1990 年代台灣地理教科書術語，跟本專案的「**大洋洲**」沿用。
+
+---
+
+<a name="screenshots"></a>
+## 📸 實機截圖展示
+
+### 群組 A：主選單 + 作者簽名（v2.19）
+
+![signature_main_menu](screenshots/signature_main_menu.png)
+*右下角 chibi pixel art 簽名（48×24 paletted PNG，4x scale 顯示 192×96）。GEOSCAPE palette block 14 + idx 32 亮綠眼鏡。詳見 [`docs/signature_design.md`](docs/signature_design.md)*
+
+### 群組 B：核心介面
 
 | Main Menu | 難度選擇 | Geoscape |
 |---|---|---|
@@ -38,11 +359,12 @@
 |---|---|---|
 | ![basescape](screenshots/basescape.png) | ![options](screenshots/options.png) | ![ufopaedia](screenshots/ufopaedia.png) |
 
-**Before / After**（上游 8×9 中空字 vs 本 patch 12×12 WQY Sharp）:
+### 群組 C：字型 Before / After
 
 ![before_after](screenshots/before_after.png)
+*上游 8×9 中空字 vs 本 patch 12×12 WQY Sharp embedded bitmap*
 
-**v2.18 UFOpaedia 文字色（兩種背景兩種配色）**：
+### 群組 D：UFOpaedia 文字色 v2.18（兩背景兩配色）
 
 | UFOpedia 選單 | Skyranger 飛機介紹（天空） | Interceptor（紫天）|
 |---|---|---|
@@ -59,220 +381,204 @@
 
 ---
 
-## 主要成果
+<a name="pioneers-1994"></a>
+## 🏛️ 1994 第三波中文化先行者
 
-| 項目 | 內容 |
-|---|---|
-| **翻譯總量** | 2 513 個 unique keys |
-| common UI | 437 / 427 = **102%** |
-| xcom1 (UFO Defense) | 1 101 / 1 075 = **102%**（含 ufopedia 長段落） |
-| xcom2 (TFTD) | 975 / 1 166 = **84%**（含 14 段 mission briefings + 結局劇情） |
-| **字型** | WQY Zen Hei Sharp 12 px embedded bitmap（Apache 2.0 / GPL） |
-| **字型 PNG** | FontBig / FontSmall / FontGeoSmall_zh-TW（皆 12×12 cell） |
-| **Source patches** | 5 個 .cpp 檔（Font line step / Options baseRes / Geoscape widget / Ufopedia Craft 深棕 / CraftWeapon 維持 vanilla） |
-| **驗證** | Ship gate 3/3 PASS（YAML coverage / format specifier / char coverage） |
+在這個專案之前，有一份 1994 年的台灣出版物為繁體中文世界奠定了 X-COM 的詞彙基礎。
 
----
+### 第三波文化《幽浮１—地球防衛武力》遊戲手冊（1994，46 頁）
 
-## 安裝
+**出版**：第三波文化事業股份有限公司  
+**編譯**：阮建成  
+**原著**：MicroProse, _UFO: Enemy Unknown_  
+**數位化**：DDSC (Documents Digitize Service Center), 2009-02-26
 
-### 方式 0：整包獨立版（最簡單，雙平台）
+當年沒有攻略 App、沒有 Discord；台灣的第一批 X-COM 玩家就憑這本薄薄的中文手冊，走進一個 320×200 解析度的英文戰術世界。
 
-不必 build、不必裝 Steam、不必裝 runtime — **整包雙擊就跑**。
+**手冊收錄**：
+- 主畫面/攔截/基地/統計/UFOPAEDIA/選項/補助/地面戰鬥 共 8 個畫面區段
+- 200+ 條英中對照詞彙（按字母順序綜合列表）
+- 涵蓋：兵種、軍階、飛行器、武器、設施、屬性、戰場行動、研究/製造、外星人
 
-| 平台 | 檔名 | 大小 | 啟動 |
+**關鍵譯名 32 年來繁中圈通用**：幽浮 / 攔截機 / 運兵機 / 電漿 / 心靈 / 收容所 / 指揮官 / 雪崩式飛彈 / 黃貂魚式飛彈。
+
+### 與 1994 年手冊的詞彙決策對照
+
+| 英文 | 1994 第三波 | 本專案 | 結論 |
 |---|---|---|---|
-| Windows 10/11 64-bit | `OpenXcom-CHT-v2.19-portable.zip` | 8.11 MB | 解壓後雙擊 `OpenXcom-CHT.cmd` |
-| Linux x86_64 | `OpenXcom-CHT-v2.19-x86_64.AppImage` | 16 MB | `chmod +x *.AppImage && ./OpenXcom-CHT-v2.19-x86_64.AppImage` |
+| UFO | 幽浮 | **幽浮** | ✓ 沿用 1994 |
+| UFOPAEDIA | 幽浮百科 | **幽浮百科** | ✓ 沿用 1994 |
+| INTERCEPTOR | 攔截機 | **攔截機** | ✓ 沿用 1994 |
+| PLASMA | 電漿 | **電漿** | ✓ 沿用 1994 — 32 年來繁中圈一致 |
+| SKYRANGER | **運兵機** | 天空遊俠 | ⚠️ 1994 較佳，**後續版本待改回** |
+| STINGRAY | **黃貂魚式飛彈** | 刺尾 | ⚠️ 1994 為正譯（魟魚），「刺尾」是誤譯 |
+| MEDI-KIT | **醫藥箱** | 醫療包 | 雙方皆通 |
+| BERSERK | 發狂 | 陷入狂暴 | 1994 較簡潔 |
+| 軍階體系 | 兵 / 士官 / 尉官 / 校官 | 下士 / 中士 / 上尉 / 上校 | 現行更精確 |
 
-**內含**：openxcom EXE + 全部 runtime（Win 20 個 DLL；Linux 57 個 .so）+ 翻譯資產 + 字型 + X-COM 1 原始遊戲資料（10 MB）+ portable launcher + 預設 zh-TW + 1280×800 設定。
+完整 200+ 條譯名對照、衝突分析、修正候選見 [`docs/GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md)。
 
-Linux AppImage 用 `appimagetool` 打包，存檔路徑自動指向 `$XDG_DATA_HOME/openxcom-cht/` 與 `$XDG_CONFIG_HOME/openxcom-cht/`，不污染 OS。
+### 匿名 PDF 掃描者
 
-僅供**已擁有正版 X-COM 1**的玩家私人保存使用，內含原始遊戲資料（10 MB），版權屬 MicroProse / 2K Games，不可公開散布。
-
-GitHub repo 本身**不收** ZIP（避免版權與檔案大小爭議）。如何自製：
-1. 走方式 B build EXE
-2. 取得正版 X-COM 1 資料（Steam: `XCom UFO Defense\XCOM\` 9 個子目錄）
-3. 用 `tools/make_portable.ps1`（待加）或手動依下面結構打包
-
-```
-OpenXcom-CHT-v2.18-portable\
-├── openxcom.exe + 20 個 DLL
-│   (SDL / yaml-cpp / libpng / libogg / libvorbis / libwebp / libFLAC ...
-│    MSVCP140 / VCRUNTIME140 / VCRUNTIME140_1)
-├── OpenXcom-CHT.cmd          ← portable launcher，-data data -user user -config user
-├── README.txt                ← 中文使用說明
-├── data\common\              ← OpenXcom 通用資源 + 字型 + 翻譯
-├── data\standard\            ← xcom1/xcom2 mods
-├── data\UFO\                 ← 原版 X-COM 1 遊戲資料（需自備）
-└── user\options.cfg          ← 預設 zh-TW + 1280x800
-```
-
-第一次啟動實測：`Display set to 1280x800x8` + `Language loaded successfully` ✓
-解到任意路徑（包含中文路徑）皆可運作。
-
-### 方式 A：把翻譯資產 drop 進 OpenXcom data 目錄
-
-不必重 build。直接用 vanilla OpenXcom 1.0 release 或更新 EXE。
-
-```bash
-# 1. 把 bin/ 內容 merge 到 OpenXcom data 目錄（覆蓋 Font.dat、補 zh-TW.yml + 3 個 PNG）
-cp -r bin/common/Language/*    /path/to/OpenXcom/data/common/Language/
-cp    bin/standard/xcom1/Language/zh-TW.yml  /path/to/OpenXcom/data/standard/xcom1/Language/
-cp    bin/standard/xcom2/Language/zh-TW.yml  /path/to/OpenXcom/data/standard/xcom2/Language/
-
-# 2. 設語言（在 options.cfg 或遊戲內 Options > Language）
-#    language: zh-TW
-```
-
-**注意**：vanilla EXE 沒有 source patch，所以 line-step / Geoscape 時鐘 widget / Ufopaedia 文字色 issue 仍存在。要完整體驗請走方式 B。
-
-### 方式 B：從 source 重 build（含全部 patch）
-
-```bash
-# 1. clone vanilla OpenXcom master
-git clone https://github.com/OpenXcom/OpenXcom /tmp/openxcom-src
-cd /tmp/openxcom-src
-
-# 2. 套 4 個 source patch（檔在 patches/src/）
-cp /path/to/this-repo/patches/src/Engine/Font.cpp           src/Engine/
-cp /path/to/this-repo/patches/src/Engine/Options.cpp        src/Engine/
-cp /path/to/this-repo/patches/src/Geoscape/GeoscapeState.cpp  src/Geoscape/
-cp /path/to/this-repo/patches/src/Ufopaedia/ArticleStateCraft.cpp        src/Ufopaedia/
-cp /path/to/this-repo/patches/src/Ufopaedia/ArticleStateCraftWeapon.cpp  src/Ufopaedia/
-
-# 3. 複製翻譯資產
-cp -r /path/to/this-repo/bin/* bin/
-
-# 4. Build (Linux)
-mkdir build && cd build
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
-make -j$(nproc)
-
-# 或 Windows (VS 2022 BT)
-# 重點：set CL=/utf-8 否則 MSVC 在 cp950 系統會把 UTF-8 string literal 認成多字節
-# 詳見 tools/wsl_build_linux.sh
-```
-
-### Steam X-COM data
-
-OpenXcom 需要原版 X-COM data。Steam 版的「XCom UFO Defense」買下後在 `steamapps/common/XCom UFO Defense/XCOM/` 子目錄。把 9 個子目錄 (`GEODATA / GEOGRAPH / MAPS / ROUTES / SOUND / TERRAIN / UFOGRAPH / UFOINTRO / UNITS`) 複到 OpenXcom 的 `data/UFO/`。
+這份 1994 紙本文獻得以在 2026 年仍能供我們查閱，全賴 DDSC 不知名的掃描者於 2009 年將其數位化保存。沒有他們，30 年後的漢化研究就只能憑空推測。原始 PDF 收錄於 [`docs/DDSC-J-00120-...pdf`](docs/)（30 MB，46 頁，非商業流傳）。
 
 ---
 
-## Source patches 說明
+<a name="technical-deep-dive"></a>
+## 🔧 Technical Deep Dive
+
+### 翻譯策略：軍事公文體 + 1990 年代電玩翻譯味
+
+X-COM 內介面用詞屬於**軍事行動報告**體例：簡短、被動、命令式。例如：
+
+| 原文 | 太白（❌） | 太古（❌） | 採用（✓） |
+|---|---|---|---|
+| LAUNCH | 發射！| 啟航！| **派出** |
+| READY | 準備好了 | 蓄勢待發 | **待命** |
+| INTERCEPT | 攔截它 | 邀擊之 | **攔截** |
+| INTERCEPTOR DAMAGED | 攔截機壞了 | 攔截機受創 | **攔截機受損** |
+| HAS GONE BERSERK | 抓狂了 | 喪心病狂 | **陷入狂暴** |
+
+### 5 個 Source Patches（最小化原則）
 
 | Patch | 用途 |
 |---|---|
-| `Font.cpp:193` | `getHeight()` 取所有 image max height — 修 line step 不跟 per-image override |
-| `Options.cpp:80-85` | 解鎖 `baseXResolution` / `baseYResolution` OptionInfo（options.cfg 可改 base resolution） |
-| `GeoscapeState.cpp:156-168, 347-378` | Hour widget 改 `setSmall()`、Min/Sec 對齊、Weekday widget h=12、Day/Month/Year 合併為「1999 / 1 / 1」西元格式 |
-| `ArticleStateCraft.cpp` | UFOpedia 飛機介紹文字色：vanilla `blockOffset(14)+15` (=239) 對天空背景 UP004 對比不足 → 改 `blockOffset(14)+10` (=234)，pixels 落 235..239 = `#7C5440..#503020` deep brown ramp，對藍天 L 差 40-170 |
-| `ArticleStateCraftWeapon.cpp` | 武器介紹頁背景是 **黑底 weapon 圖**（UP006..UP011），維持 vanilla `+15` (=239)，pixels 240..244 淺藍 ramp `#A0B8D8..#2C3C4C` 對黑底完美 |
-| `Menu/MainMenuState.{cpp,h}` | 主選單右下角加 chibi pixel art 簽名「原來是個胖仔 / wicanr2」（48×24 paletted PNG via `Surface::loadImage(Resources/signature_pang.png)`）|
+| `Engine/Font.cpp:193` | `getHeight()` 取所有 image max height — 修 line step 不跟 per-image override |
+| `Engine/Options.cpp:80-85` | 解鎖 `baseXResolution / baseYResolution` OptionInfo（options.cfg 可改 base resolution） |
+| `Geoscape/GeoscapeState.cpp` | 時鐘 widget 改 `setSmall()`、Weekday 縮小、日期改西元「1999 / 1 / 1」 |
+| `Ufopaedia/ArticleStateCraft.cpp` | 飛機 article 文字色 `blockOffset(14)+10` (234) — deep brown ramp 對天空 ✓ |
+| `Ufopaedia/ArticleStateCraftWeapon.cpp` | 武器 article 維持 vanilla `+15` (239) — light blue ramp 對黑底 ✓ |
+| `Menu/MainMenuState.{cpp,h}` | 主選單右下角加 chibi pixel art 簽名（48×24 paletted PNG）|
 
----
+### 字型架構：12px 點陣 + per-image override
 
-## 字型 designer
+X-COM 原生字型 8×9（ASCII only）。直接放大全字型會破壞 vintage 視覺。本專案策略：
 
-`tools/make_fonts_zhtw.py` — Python + Pillow 從 [WQY Zen Hei Sharp TTC](http://wenq.org/) 渲染 zh-TW 字型 PNG。
-
-```python
-JOBS = [
-    ("FONT_SMALL",    "FontSmall_zh-TW.png",    12, 12, 12, 50),
-    ("FONT_BIG",      "FontBig_zh-TW.png",      12, 12, 12, 50),
-    ("FONT_GEO_SMALL","FontGeoSmall_zh-TW.png", 12, 12, 12, 50),
-]
+```yaml
+# Font.dat
+- id: FONT_SMALL
+  width: 8           # global 預設保留 ASCII 大小
+  height: 9
+  spacing: -1
+  images:
+    - file: FontSmall.png         # 上游 ASCII，不動
+      width: 8
+      height: 9
+    - file: FontSmall_zh-TW.png   # 我們的中文字
+      width: 12        # per-image override
+      height: 12
+      spacing: 2       # 避免相鄰字 ink 黏
+      chars: > ...     # 4 808 字
 ```
 
-每張 image：
-- Cell 12×12（per-image override，仿韓文 `width: 10` 寫法）
-- Glyph 12 px（WQY Sharp embedded bitmap 銳利）
-- 50 cells/row, 4 808 字（涵蓋 BMP 常用字）
-- 8 bpp paletted PNG（idx 0 = bg, idx 1 = fg）
-- ⚠️ `FontGeoSmall_zh-TW.png` cell **不可降到 10** — Geoscape 右側 menu（攔截/基地/圖表/...）共用這張字型，cell 10 + glyph 9 會有 71 chars 被 clip → menu 字身殘缺
+關鍵雷區：
+- `FontGeoSmall_zh-TW.png` cell **不可降到 10** — Geoscape 右側選單（攔截/基地/圖表/…）共用這張字型，cell 10 會 clip 71 字
+- 全局 height 9 不可改 12，否則 vanilla `FontSmall.png` 8×9 被當 8×12 slice → ASCII 字表錯位
+- `spacing: 2` per-image override 解 ghost overlap（CJK ink 寬 = cell-1，相鄰會黏）
 
----
+### Geoscape 時鐘 widget layout（CJK 11px vs ASCII 9px 行距取捨）
 
-## Validators
+```cpp
+// v2.17 final（GeoscapeState.cpp）
+_txtHour->setSmall();      // 12:00:00 群組改用 8x9 ASCII font
+_txtHourSep->setSmall();
+_txtMin->setSmall();
+_txtMin->setAlign(ALIGN_LEFT);
+_txtWeekday = new Text(59, 12, screenWidth-61, screenHeight/2-15);
+_txtYear  = new Text(59, 12, screenWidth-61, screenHeight/2-4);  // "1999 / 1 / 1"
+_txtDay->setText(""); _txtMonth->setText("");                    // 合併到 Year widget
+```
+
+設計取捨：1994 原版時鐘是純 ASCII 緊湊 layout，CJK 全寬字撐破。妥協方案：時鐘行 (12:00:00) 用 ASCII 字體保留緊湊性，下一行 Weekday 用 CJK 12px，再下行用「西元 / 月 / 日」三段組合避免月日縮寫不通順。
+
+### UFOpaedia 文字色 root-cause
+
+```cpp
+// src/Interface/Text.cpp:466 PaletteShift::func
+dest_palette_index = color + src * mul    // src=font glyph AA pixel 1..5
+```
+
+**`color` 不是顯示色，是 ramp 基底**。真實像素落在 `[color+1..color+5]`。所以：
+- vanilla 239 → 像素 240..244：PAL_UFOPAEDIA 是「淡奶油→灰」（淡色 ramp）對天空背景對比災難
+- v1 嘗試 255 → 像素 0..4：idx 0 透明 + block 15 起點淡黃色 → 完全不可見
+- v2.18 final = **234 deep brown ramp**（對天空）+ **239 light blue ramp**（對黑底）
+
+完整推導見 [`docs/ux_color_v2_designer.md`](docs/ux_color_v2_designer.md)。
+
+### 主選單簽名整合（v2.19）
+
+```cpp
+// MainMenuState.cpp
+_sigBadge = new Surface(48, 24, 270, 174);  // base 320x200, 右下角
+add(_sigBadge);                              // raw surface, 不走 interfaces.rul
+_sigBadge->loadImage(FileMap::getFilePath("Resources/signature_pang.png"));
+```
+
+PNG 是 8bpp paletted，palette 對齊 PAL_GEOSCAPE（MainMenuState 使用的 palette），不需 remap。設計師 agent 用 GEOSCAPE block 14 橄欖→暗棕 + idx 32 亮綠（眼鏡點綴）共 8 個 palette idx。詳見 [`docs/signature_design.md`](docs/signature_design.md)。
+
+### 驗證 pipeline
 
 ```bash
-# 3 個 validator + 1 ship gate runner
-python3 tools/wsl_validate_translations.py    # YAML coverage + 簡體偵測 + empty 值
-python3 tools/wsl_deep_validate.py            # format specifier / glossary / length / untranslated
-python3 tools/wsl_check_char_coverage.py      # 翻譯中是否有字型沒涵蓋的字
-bash    tools/wsl_ship_gate.sh                # 跑全 3 個 + PASS/FAIL summary
+python3 tools/wsl_validate_translations.py    # YAML coverage + 簡體偵測
+python3 tools/wsl_deep_validate.py            # format specifier / glossary
+python3 tools/wsl_check_char_coverage.py      # 字型 cell list 涵蓋率
+bash    tools/wsl_ship_gate.sh                # 跑全 3 + PASS/FAIL summary
 ```
 
-Ship gate 全 PASS 條件：
-- 0 missing chars（所有翻譯中的字都在字型 cell list 內）
-- 0 真簡體（「算」字為繁體常用「算作 / 算法」誤判，可忽略）
-- 0 FMT_MISMATCH（`{0} / {NEWLINE} / {ALT}` 數量 en==zh）
-- Coverage 100% (en key set 全翻完)
+Ship gate 3/3 PASS 條件：
+- 0 missing chars / 0 真簡體 / 0 FMT_MISMATCH / 100% en key coverage
 
 ---
 
-## Glossary（台灣慣用譯名）
+<a name="upstream"></a>
+## ⬆️ Upstream & Patches
 
-> 📖 **完整 1994 第三波官方手冊譯名對照** 見 [`docs/GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md) — 含 200+ 條英中對照、衝突分析、後續修正建議。原始 PDF 收錄於 [`docs/DDSC-J-00120-遊戲手冊：幽浮１－地球防衛武力.pdf`](docs/)。
-
-### X-COM 載具 / 兵種
-
-| English | 繁中 | 1994 第三波 |
-|---|---|---|
-| Interceptor | 攔截機 | 攔截機 ✓ |
-| Skyranger | 天空遊俠 | **運兵機** ⚠️ 1994 較佳，後續版本待改 |
-| Lightning / Avenger / Firestorm | 閃電 / 復仇者 / 風暴 | — |
-| Sectoid | 腦蟲 |
-| Snakeman | 蛇人 |
-| Ethereal | 靈體 |
-| Floater | 浮游者 |
-| Muton | 巨型怪 |
-| Chryssalid | 蟹形蟲 |
-| Reaper | 收割者 |
-| Sectopod | 腦機甲 |
-| Cyberdisc | 電腦碟 |
-| Celatid / Silacoid | 盲蟲 / 矽生物 |
-| Plasma / Laser / Heavy | 電漿 / 雷射 / 重型 | 電漿 / 雷射 / 重型 ✓ 全沿用 1994 |
-| Stingray (missile) | 刺尾 | **黃貂魚式飛彈** ⚠️ 1994 為正譯（魟），「刺尾」是誤譯 |
-| Avalanche (missile) | 雪崩 | 崩雪式飛彈 |
-| Medi-Kit | 醫療包 | 醫藥箱 |
-| Cydonia | 賽多尼亞 | — |
-
-### TFTD（海底支線）
-
-| English | 繁中 |
+| 項目 | 來源 |
 |---|---|
-| Aquatoid / Gillman / Lobsterman | 水生人 / 魚鰓人 / 龍蝦人 |
-| Tasoth / Deep One / Calcinite | 塔索斯 / 深淵者 / 鈣化體 |
-| Triscene / Hallucinoid / Xarquid | 三角龍 / 幻象生物 / 薩奎 |
-| Bio-Drone / Tentaculat | 生物無人機 / 觸手怪 |
-| Triton / Manta / Hammerhead | 海神號 / 曼塔號 / 槌鯊號 |
-| Z'rbite / T'leth | Z 元素 / 賽爾斯 |
+| **上游專案** | [github.com/OpenXcom/OpenXcom](https://github.com/OpenXcom/OpenXcom) (master) |
+| **Fork 基準 commit** | `1edb0a5a`（2024-2025 era master） |
+| **Upstream license** | GPL-3.0-or-later |
+| **Patches 數量** | **5 個** `.cpp` + 1 PNG（最小化原則，全在 `patches/src/`） |
+| **本地 build 位置** | `D:\openxcom\OpenXcom\`（含 v2.19 patched source） |
+
+**本專案不 fork 上游、不 maintain 平行分支** — 只發佈 5 個獨立 patch 檔，任何人可在乾淨的 OpenXcom master clone 上覆蓋這 5 檔重新 build。
+
+### 衍生工具
+
+- [`tools/make_portable.ps1`](tools/make_portable.ps1) — Windows portable ZIP 一鍵打包
+- [`tools/build_appimage.sh`](tools/build_appimage.sh) — Linux AppImage 一鍵打包（ldd analysis + XDG-compliant launcher）
+- [`tools/make_fonts_zhtw.py`](tools/) — PIL + WQY 渲染 zh-TW 字型 PNG
 
 ---
 
-## License
+<a name="credits"></a>
+## 📜 License & Credits
 
 | Component | License |
 |---|---|
-| OpenXcom (上游 + source patches) | GPL-3.0-or-later |
-| zh-TW translation YAML | CC BY-SA 4.0（譯者 own work） |
-| WQY Zen Hei Sharp（FontBig / Small / GeoSmall 來源） | Apache 2.0 / GPL |
-| `tools/` Python scripts | MIT |
+| OpenXcom 本體 + 5 source patches | GPL-3.0-or-later |
+| zh-TW 翻譯 YAML | CC BY-SA 4.0（譯者 own work） |
+| WQY Zen Hei Sharp（FontBig / Small / GeoSmall 來源） | Apache 2.0 / GPL 雙授權 |
+| `signature_pang.png`（chibi 簽名）| CC BY-SA 4.0 |
+| `tools/` Python / Bash / PowerShell scripts | MIT |
+| 1994 第三波《幽浮１》手冊（`docs/DDSC-J-...pdf`）| 版權屬第三波文化 / MicroProse；非商業流傳，僅供翻譯參考 |
+| X-COM 原始遊戲資料（`data/UFO/`）| MicroProse / 2K Games 版權；不在 GitHub repo 內 |
 
-OpenXcom 本體繼承上游 GPL-3.0。Source patch 同樣 GPL-3.0。翻譯內容 CC BY-SA 4.0 — 修改/散佈請保留 attribution 並用相同 license。字型內嵌 ink 來自 WQY Zen Hei Sharp（雙授權 Apache 2.0 / GPL），不另外申明嵌入。
+### 致謝
 
----
+- **Julian Gollop**（1994 X-COM 原作設計）— 創造 turn-based 戰術 RPG 雙層架構的天才
+- **SupSuper + OpenXcom 團隊** — 從零重寫 1994 遊戲邏輯，2009 至今 16 年持續維護
+- **阮建成 / 第三波文化**（1994）— 為繁中圈奠定 X-COM 詞彙基礎
+- **DDSC 匿名掃描者**（2009）— 保存 1994 手冊 PDF
+- **文泉驛 WQY Zen Hei** — 提供 IP-safe 中文字型來源
 
-## 開發歷程 / 設計 doc
+### 開發歷程 / 設計 doc
 
 詳見 `docs/`：
 
 - [`GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md) — 1994 第三波官方手冊 vs 本專案譯名對照（200+ 條）
-- [`ux_color_v2_designer.md`](docs/ux_color_v2_designer.md) — UFOpaedia 文字色 v2 配色 root cause（PaletteShift `dest = color + src*mul` 公式）+ 兩種背景兩種選色推導
-- [`signature_design.md`](docs/signature_design.md) — 主選單作者簽名 chibi pixel art 設計說明（layout / palette / 像素佈局 / rationale）
+- [`ux_color_v2_designer.md`](docs/ux_color_v2_designer.md) — UFOpaedia 文字色 v2 配色 root cause + palette dump 推導
+- [`signature_design.md`](docs/signature_design.md) — 主選單作者簽名 chibi pixel art 設計說明
 - [`v2_plan.md`](docs/v2_plan.md) — 4 階段路線圖（v2.1 → v2.4）
 - [`v2_review.md`](docs/v2_review.md) — v2 全 round design review（1 356 keys）
 - [`SHIP_FINAL_V212.md`](docs/SHIP_FINAL_V212.md) — v2.12 ship final report
@@ -280,21 +586,17 @@ OpenXcom 本體繼承上游 GPL-3.0。Source patch 同樣 GPL-3.0。翻譯內容
 - [`trans_v23_batch1.md`](docs/trans_v23_batch1.md) — v2.3 round 117 條 UFOpedia 補翻
 - [`DDSC-J-00120-遊戲手冊：幽浮１－地球防衛武力.pdf`](docs/) — 1994 第三波官方繁中手冊原文（46 頁，30 MB；DDSC 數位化，非商業流傳）
 
-## 已知 issues
-
-1. **「資」字 12×12 視覺近「宜」** — 12 px 點陣下「次」部首壓縮，純字型品質限制（不修，記錄）
-2. **Weekday 跟 Hour 上緣 5 px overlap** — vintage 320×200 sprite 寫死 ASCII 9 px line，CJK 12 px 在時鐘區無法兩全（已盡力 layout）
-3. **混排 ASCII + CJK advance 不一致** — `FontBig.png spacing:0` vs `FontBig_zh-TW spacing:2` → 「X-COM 載具」整行對位輕微偏（cosmetic only）
-4. **TFTD 全 UFOpedia 長段落未補完** — 剩 ~190 條長 narrative，玩家較少看到（v2.4 候選）
-
----
-
-## 參考
+### 參考
 
 - [OpenXcom](https://github.com/OpenXcom/OpenXcom) — 上游
 - [OpenXcom Extended (OXCE)](https://github.com/MeridianOXC/OpenXcom) — fork with hi-res mod support
-- [WQY Zen Hei](http://wenq.org/) — 字型來源
+- [文泉驛 Zen Hei](http://wenq.org/) — 字型來源
 - **1994 第三波官方繁中手冊**（DDSC-J-00120）— 譯名歷史對照基準，見 [`docs/GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md)
-- 完整 skill 細節：[`~/.claude/skills/openxcom-cht/SKILL.md`](https://github.com/wicanr2/openxcom-cht)（如果你也在用 Claude Code）
+- 完整 skill 細節：`~/.claude/skills/openxcom-cht/SKILL.md`（如果你也在用 Claude Code）
 
 PR / issue welcome — 特別是 v2.4 TFTD 長 narrative 補翻、字典統一、UI 排版 trade-off 改進。
+
+---
+
+> 「**指揮官**，X-COM 計畫的成敗，就交給您了。地球的命運懸於一線。」  
+> *Commander, the fate of XCOM rests in your hands. Earth's destiny hangs by a thread.*
