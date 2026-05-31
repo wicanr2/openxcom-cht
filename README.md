@@ -1,7 +1,7 @@
 # OpenXcom 繁體中文化專案
 
-> *X-COM: UFO Defense* (1994 MicroProse) — 完整繁體中文化  
-> 2 513 翻譯鍵 ✦ WQY Sharp 12px 點陣字型 ✦ 5 個 source patch ✦ 1994 第三波官方手冊譯名對照 ✦ Windows ZIP + Linux AppImage
+> *X-COM: UFO Defense* (1994) + *X-COM: Terror from the Deep* (1995, MicroProse) — 完整繁體中文化  
+> 雙作 2 700+ 翻譯鍵 ✦ WQY Sharp 12px 點陣字型 ✦ 6 個 source patch ✦ 1994/1995 第三波官方手冊譯名對照 ✦ 6 國士兵名 CJK 音譯 ✦ 4 個 portable 包 (Win/Linux × UFO/TFTD)
 
 [![Ship gate](https://img.shields.io/badge/ship_gate-PASS_3%2F3-brightgreen)]()
 [![Coverage](https://img.shields.io/badge/coverage-common_102%25_%2F_xcom1_102%25_%2F_xcom2_84%25-blue)]()
@@ -21,11 +21,13 @@
 7. [武器階層 — 來福槍到電漿光束](#weapons)
 8. [外星人圖鑑 — 七種族與恐怖單位](#aliens)
 9. [世界地理 — 五大洲與基地選址](#geography)
-10. [實機截圖展示](#screenshots)
-11. [1994 第三波中文化先行者](#pioneers-1994)
-12. [Technical Deep Dive](#technical-deep-dive)
-13. [Upstream & Patches](#upstream)
-14. [License & Credits](#credits)
+10. [🌊 深海戰場 — TFTD 二代漢化](#tftd) **(v2.20 新增)**
+11. [👥 士兵名稱 CJK 化](#soldiers) **(v2.20 新增)**
+12. [實機截圖展示](#screenshots)
+13. [1994 第三波中文化先行者](#pioneers-1994)
+14. [Technical Deep Dive](#technical-deep-dive)
+15. [Upstream & Patches](#upstream)
+16. [License & Credits](#credits)
 
 ---
 
@@ -41,7 +43,8 @@
 |------|------|
 | common UI / 基礎介面 | **437 / 427 = 102%** |
 | xcom1（UFO Defense 主線） | **1 101 / 1 075 = 102%**（含 UFOPEDIA 長段落） |
-| xcom2（TFTD 海底支線） | **975 / 1 166 = 84%** |
+| **xcom2（TFTD 深海支線）** | **1 166 / 1 166 = 100%** ✨ v2.20 補完 |
+| 6 國士兵名 CJK 音譯 | **Phase A** ~2 400 entries (American/British/Chinese/Russian/German/French) |
 | 字型 | WQY Zen Hei Sharp **12 px embedded bitmap**（Apache 2.0 / GPL） |
 | Source patches | **5 個 `.cpp`**（Font / Options / Geoscape clock / UFOpedia 配色 / 簽名） |
 | 平台 | Windows 10/11 64-bit + Linux x86_64 + WSL |
@@ -52,16 +55,18 @@
 <a name="quick-start"></a>
 ## ⚡ 快速開始
 
-### 方式 0：整包獨立版（最簡單，雙平台）
+### 方式 0：整包獨立版（v2.20 雙作四包）
 
 不必 build、不必裝 Steam、不必裝 runtime — **整包雙擊就跑**。
 
-| 平台 | 檔名 | 大小 | 啟動 |
-|---|---|---|---|
-| Windows 10/11 64-bit | `OpenXcom-CHT-v2.19-portable.zip` | 8.11 MB | 解壓後雙擊 `OpenXcom-CHT.cmd` |
-| Linux x86_64 | `OpenXcom-CHT-v2.19-x86_64.AppImage` | 16 MB | `chmod +x *.AppImage && ./OpenXcom-CHT-v2.19-x86_64.AppImage` |
+| 平台 | UFO（一代地表）| TFTD（二代深海）|
+|---|---|---|
+| **Windows 10/11 64-bit** | `OpenXcom-CHT-v2.20-UFO-portable.zip` 8.1 MB | `OpenXcom-CHT-v2.20-TFTD-portable.zip` 37 MB |
+| **Linux x86_64** | `OpenXcom-CHT-v2.20-UFO-x86_64.AppImage` 16 MB | `OpenXcom-CHT-v2.20-TFTD-x86_64.AppImage` 45 MB |
 
-**內含**：openxcom EXE + 全部 runtime（Win 20 個 DLL；Linux 57 個 .so）+ 翻譯資產 + 字型 + X-COM 1 原始遊戲資料（10 MB）+ portable launcher + 預設 zh-TW + 1280×800 設定。
+**為何拆成 4 包？** 已知 OpenXcom 在 runtime 切換 mod (xcom1 ↔ xcom2) 會 crash — 每包只含一作對應遊戲資料 + 預設 active mod，避免使用者誤切。
+
+**內含**：openxcom EXE + 全部 runtime（Win 20 個 DLL；Linux 57 個 .so）+ 翻譯資產 + 字型 + 對應原始遊戲資料（UFO 10 MB / TFTD 60 MB）+ portable launcher + 預設 zh-TW + 1280×800 設定。
 
 Linux AppImage 走 XDG 路徑（`$XDG_DATA_HOME/openxcom-cht/` 與 `$XDG_CONFIG_HOME/openxcom-cht/`），不污染 OS。
 
@@ -341,6 +346,84 @@ USA、UK、FRANCE、GERMANY、ITALY、SPAIN、RUSSIA、JAPAN、CHINA、INDIA、C
 
 ---
 
+<a name="tftd"></a>
+## 🌊 深海戰場 — TFTD 二代漢化（v2.20 新增）
+
+> 「2040 年 1 月 1 日。深海中傳來不明信號⋯⋯」
+
+繼一代《幽浮：地球防衛武力》ship 後，v2.20 補完《幽浮：深海出擊》(*X-COM: Terror from the Deep*, 1995) 的完整繁體中文化。
+
+### TFTD 設定與核心差異（vs 一代）
+
+| | UFO (1994) | TFTD (1995) |
+|---|---|---|
+| 時間 | 1999 年 | 2040 年（一代結束 40 年後）|
+| 戰場 | 地表 + 大氣層 | 海面 + 深海 |
+| 玩家組織 | X-COM | X-COM 海軍分部 |
+| 載具 | 攔截機 / 運兵機 | 海神號 / 曼塔號 / 槌鯊號（潛艇）|
+| 武器系 | 雷射 → 電漿 | 高斯 → 聲波（**SONIC ≠ 音速** — 正譯「聲波」）|
+| 動能 | Elerium-115 | Z 元素（Zrbite，深海版稀有元素）|
+| 終局 | 火星 Cydonia | 海底古城 T'leth（賽爾斯）|
+
+### TFTD 種族圖鑑
+
+**七大智慧種族**（1995 手冊只列 2 個 — Aquatoid / Gillman，其餘為社群慣例）：
+
+| 英文 | 1995 第三波 | 本專案 | 備註 |
+|---|---|---|---|
+| AQUATOID | **水族人** | 水生人 | ⚠️ 1995 較佳，v2.21 候選改回 |
+| GILLMAN | **魚鰓人** | 魚鰓人 | ✓ 沿用 1995 |
+| LOBSTERMAN | — | 龍蝦人 | 社群慣例 |
+| TASOTH | — | 塔索斯 | 社群慣例 |
+| BIO-DRONE | — | 生物無人機 | 社群慣例 |
+| TENTACULAT | **觸鬚人** | 觸手怪 | 1995 較貼洛夫克拉夫特氛圍，v2.21 候選 |
+| CALCINITE | **石灰人** ❌ | **鈣化體** ✓ | 1995 化學不精準（CaO ≠ CALCIN-），現行正確 |
+| DEEP ONE | **深海一號** ❌ | **深淵者** ✓ | 1995 誤譯（洛夫克拉夫特典故，非編號），現行正確 |
+
+**恐怖戰場單位**：三角龍 (Triscene) / 幻象生物 (Hallucinoid) / 薩奎 (Xarquid)
+
+### 1995 第三波獨家妙譯（本專案已採納）
+
+| 英文 | 1995 第三波 | 原因 |
+|---|---|---|
+| **ALIEN SUB PEN** | 潛艇修理塢 | penitentiary（監獄）+ pen（圍欄）雙關，1995 精準翻譯 |
+| **THERMAL TAZER** | (未列) | THERMAL=熱，現行修正為「**熱能電擊棒**」(舊版誤譯「冷凍電擊棒」反向) |
+
+完整 80+ 條 TFTD 譯名對照 + 5 條「不要回退」警告見 [`docs/GLOSSARY_1995_TFTD_MANUAL.md`](docs/GLOSSARY_1995_TFTD_MANUAL.md)。原始 1995 手冊 PDF 收錄於 [`docs/DDSC-J-00121-遊戲手冊：幽浮２－深海出擊.pdf`](docs/)（53 頁，34.9 MB）。
+
+### TFTD 截圖
+
+| TFTD 主選單（含簽名）| Geoscape 2040/1/1 |
+|---|---|
+| ![tftd_main](screenshots/tftd_signature_main_menu.png) | ![tftd_geoscape](screenshots/tftd_geoscape.png) |
+| *綠色 TFTD 風格主選單，右下角 chibi 簽名共用* | *2040 年深海戰役起點，全中文 Geoscape* |
+
+---
+
+<a name="soldiers"></a>
+## 👥 士兵名稱 CJK 化（v2.20 Phase A — 6 國音譯）
+
+> 「Wang Wei」→ 「王偉」/ 「Fernando Guedes」→ 「費南多·古艾迪斯」
+
+OpenXcom 用 `bin/common/SoldierName/*.nam` 抽士兵名（34 個 nationality .nam 檔，~11 000 個名字）。v2.20 完成 Phase A — 6 國 ~2 400 entries 全部音譯為 CJK：
+
+| 國家 | 譯例（男 / 女）| Entries |
+|---|---|---|
+| 美國 | 約翰·史密斯 / 瑪麗·瓊斯 | 192 |
+| 英國 | 哈洛德·泰勒 / 維多利亞·華森 | 305 |
+| 中國 | 王偉 / 李華（**單音節姓+單字名** concat 池）| 996 |
+| 俄國 | 弗拉迪米爾·彼得羅夫 / 奧爾嘉·伊凡諾娃 | 157 |
+| 德國 | 漢斯·穆勒 / 葛蕾塔·薛佛 | 69 |
+| 法國 | 皮耶·杜邦 / 瑪麗·貝爾納 | 180 |
+
+**字型涵蓋**：6 個檔案共 1 099 個獨立 CJK 字，**0 missing chars**。6 個罕見字已 swap（蔻→寇、婕→潔、婭→亞、郝→浩、鄺→匡、芷→之）。
+
+**設定真實感**：保留 X-COM「UN 多國精英部隊」原意 — 不同國籍士兵抽到不同語言風格的名字（中籍王偉、俄籍彼得羅夫、德籍穆勒）；其他 28 國（Greek/Polynesia/Japanese/Korean/Spanish/Portuguese 等）暫保留英文/羅馬拼音，**Phase B/C 排 v2.21+**。
+
+詳見 [`docs/soldier_names_phase_a.md`](docs/soldier_names_phase_a.md)。
+
+---
+
 <a name="screenshots"></a>
 ## 📸 實機截圖展示
 
@@ -577,6 +660,8 @@ Ship gate 3/3 PASS 條件：
 詳見 `docs/`：
 
 - [`GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md) — 1994 第三波官方手冊 vs 本專案譯名對照（200+ 條）
+- [`GLOSSARY_1995_TFTD_MANUAL.md`](docs/GLOSSARY_1995_TFTD_MANUAL.md) — 1995 第三波 TFTD 手冊對照 + 5 條譯名警告（80+ 條）
+- [`soldier_names_phase_a.md`](docs/soldier_names_phase_a.md) — 士兵名 Phase A 6 國 ~2400 entries 音譯 ship summary
 - [`ux_color_v2_designer.md`](docs/ux_color_v2_designer.md) — UFOpaedia 文字色 v2 配色 root cause + palette dump 推導
 - [`signature_design.md`](docs/signature_design.md) — 主選單作者簽名 chibi pixel art 設計說明
 - [`v2_plan.md`](docs/v2_plan.md) — 4 階段路線圖（v2.1 → v2.4）
