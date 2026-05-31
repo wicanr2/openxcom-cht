@@ -1,7 +1,7 @@
 # OpenXcom 繁體中文化專案
 
 > *X-COM: UFO Defense* (1994) + *X-COM: Terror from the Deep* (1995, MicroProse) — 完整繁體中文化  
-> 雙作 2 700+ 翻譯鍵 ✦ WQY Sharp 12px 點陣字型 ✦ 6 個 source patch ✦ 1994/1995 第三波官方手冊譯名對照 ✦ 6 國士兵名 CJK 音譯 ✦ 4 個 portable 包 (Win/Linux × UFO/TFTD)
+> 雙作 2 700+ 翻譯鍵 ✦ WQY Sharp 12px 點陣字型 ✦ **13 個 source patch** ✦ 1994/1995 第三波官方手冊譯名對照 ✦ **11 國士兵名 CJK 音譯** ✦ 4 個 portable 包 (Win/Linux × UFO/TFTD) ✦ **v2.21 widget 切字修復**
 
 [![Ship gate](https://img.shields.io/badge/ship_gate-PASS_3%2F3-brightgreen)]()
 [![Coverage](https://img.shields.io/badge/coverage-common_102%25_%2F_xcom1_102%25_%2F_xcom2_84%25-blue)]()
@@ -44,7 +44,8 @@
 | common UI / 基礎介面 | **437 / 427 = 102%** |
 | xcom1（UFO Defense 主線） | **1 101 / 1 075 = 102%**（含 UFOPEDIA 長段落） |
 | **xcom2（TFTD 深海支線）** | **1 166 / 1 166 = 100%** ✨ v2.20 補完 |
-| 6 國士兵名 CJK 音譯 | **Phase A** ~2 400 entries (American/British/Chinese/Russian/German/French) |
+| 11 國士兵名 CJK 音譯 | **Phase A** ~2 400 + **Phase B** ~1 100 entries (含 American/British/Chinese/Russian/German/French + Japanese/Korean/Spanish/Portuguese/Italian) |
+| **Widget 切字 patches (v2.21)** | **7 個 source patch** — 採購/出售/製造/研究/補助/基地總覽/製造詳細，「資金」「採購成本」等 label 字身完整 |
 | 字型 | WQY Zen Hei Sharp **12 px embedded bitmap**（Apache 2.0 / GPL） |
 | Source patches | **5 個 `.cpp`**（Font / Options / Geoscape clock / UFOpedia 配色 / 簽名） |
 | 平台 | Windows 10/11 64-bit + Linux x86_64 + WSL |
@@ -346,6 +347,39 @@ USA、UK、FRANCE、GERMANY、ITALY、SPAIN、RUSSIA、JAPAN、CHINA、INDIA、C
 
 ---
 
+<a name="widget-clip"></a>
+## 🔧 v2.21 — Widget 字身切底修復
+
+> 玩家原始抱怨：採購畫面「目前資金: $4,138,000」中「**金**」顯示為「**余**」（底部 4 px 被切）
+
+### 根因
+
+OpenXcom 多數 widget 寫死 `new Text(W, 9, X, Y)`，假設 ASCII 9 px 字身。CJK 12 px 字身被 SDL `setClipRect(0, 0, w, 9)` 切到底 3-4 px。「金/購/間/職/師/配/品」等帶下半部結構的字最受傷。
+
+之前 v2.14 只修 Geoscape 時鐘 widget；v2.21 補上 **7 個高頻畫面** 的同類 patch。
+
+### 修復清單
+
+| # | 檔案 | Widgets | 改法 |
+|---|---|---|---|
+| 1 | `Basescape/BasescapeState.cpp` | 2 (`_txtLocation`, `_txtFunds`) | h 9→13, y -2 — **用戶原始抱怨點** |
+| 2 | `Geoscape/FundingState.cpp` | 3 header + list y shift | h 9→13, y -2, `_lstCountries` y 40→44 |
+| 3 | `Basescape/ManufactureInfoState.cpp` | 3 widgets | h 9→13, y -2 |
+| 4 | `Basescape/PurchaseState.cpp` | 3 widgets | **h 9→11 折衷**（下方 `_cbxCategory` 擠不下 13）|
+| 5 | `Basescape/SellState.cpp` | 6 widgets | h 9→13, `_lstItems` y 54→58 |
+| 6 | `Basescape/ManufactureState.cpp` | 5 widgets + row3 下移 | h 9→13, row3 整段 y +2 |
+| 7 | `Basescape/ResearchState.cpp` | 4 widgets + row3 下移 | h 9→13, row3 整段 y +2 |
+
+### 不在 v2.21 範圍（v2.22 候選）
+
+- **`BaseInfoState.cpp`** — 26 widgets 連動，行距僅 11 px 限制
+- **`MonthlyReportState.cpp`** — 行距 8 px 需重排整段
+- **`GeoscapeCraftState.cpp`** — 同上
+
+完整 audit 推導見 [`docs/widget_clip_audit.md`](docs/widget_clip_audit.md)。實作 deviation 與決策見 [`docs/widget_patches_v221.md`](docs/widget_patches_v221.md)。
+
+---
+
 <a name="tftd"></a>
 ## 🌊 深海戰場 — TFTD 二代漢化（v2.20 新增）
 
@@ -415,6 +449,18 @@ OpenXcom 用 `bin/common/SoldierName/*.nam` 抽士兵名（34 個 nationality .n
 | 俄國 | 弗拉迪米爾·彼得羅夫 / 奧爾嘉·伊凡諾娃 | 157 |
 | 德國 | 漢斯·穆勒 / 葛蕾塔·薛佛 | 69 |
 | 法國 | 皮耶·杜邦 / 瑪麗·貝爾納 | 180 |
+
+**v2.21 Phase B 新增 5 國**（~1 100 entries）：
+
+| 國家 | 譯例 | Entries |
+|---|---|---|
+| 日本 | 田中明 / 渡邊由美 | 123 |
+| 韓國 | 金敏俊 / 朴秀妍 | 232 |
+| 西班牙 | 卡洛斯·賈西亞 / 瑪麗亞·羅培茲 | 239 |
+| 葡萄牙 | 若昂·席爾瓦 / 瑪麗亞·桑托斯 | 353 |
+| 義大利 | 朱塞佩·羅西 / 瑪麗亞·比安基 | 102 |
+
+**11 國累計 0 missing chars**（v2.21 唯 1 字 swap：燁→業）。
 
 **字型涵蓋**：6 個檔案共 1 099 個獨立 CJK 字，**0 missing chars**。6 個罕見字已 swap（蔻→寇、婕→潔、婭→亞、郝→浩、鄺→匡、芷→之）。
 
@@ -662,6 +708,9 @@ Ship gate 3/3 PASS 條件：
 - [`GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md) — 1994 第三波官方手冊 vs 本專案譯名對照（200+ 條）
 - [`GLOSSARY_1995_TFTD_MANUAL.md`](docs/GLOSSARY_1995_TFTD_MANUAL.md) — 1995 第三波 TFTD 手冊對照 + 5 條譯名警告（80+ 條）
 - [`soldier_names_phase_a.md`](docs/soldier_names_phase_a.md) — 士兵名 Phase A 6 國 ~2400 entries 音譯 ship summary
+- [`soldier_names_phase_b.md`](docs/soldier_names_phase_b.md) — 士兵名 Phase B 5 國 ~1100 entries (JP/KR/ES/PT/IT) ship summary
+- [`widget_clip_audit.md`](docs/widget_clip_audit.md) — v2.21 widget 切字 audit (338 hits → 100 受害 widget → Top 10 worst offenders)
+- [`widget_patches_v221.md`](docs/widget_patches_v221.md) — v2.21 widget 7 處實作 deviation 與決策
 - [`ux_color_v2_designer.md`](docs/ux_color_v2_designer.md) — UFOpaedia 文字色 v2 配色 root cause + palette dump 推導
 - [`signature_design.md`](docs/signature_design.md) — 主選單作者簽名 chibi pixel art 設計說明
 - [`v2_plan.md`](docs/v2_plan.md) — 4 階段路線圖（v2.1 → v2.4）
