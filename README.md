@@ -76,9 +76,18 @@
 
 ## 安裝
 
-### 方式 0：Portable ZIP（最簡單）
+### 方式 0：整包獨立版（最簡單，雙平台）
 
-不必 build、不必裝 Steam、不必裝 VC++ Redist — **整包雙擊就跑**。
+不必 build、不必裝 Steam、不必裝 runtime — **整包雙擊就跑**。
+
+| 平台 | 檔名 | 大小 | 啟動 |
+|---|---|---|---|
+| Windows 10/11 64-bit | `OpenXcom-CHT-v2.19-portable.zip` | 8.11 MB | 解壓後雙擊 `OpenXcom-CHT.cmd` |
+| Linux x86_64 | `OpenXcom-CHT-v2.19-x86_64.AppImage` | 16 MB | `chmod +x *.AppImage && ./OpenXcom-CHT-v2.19-x86_64.AppImage` |
+
+**內含**：openxcom EXE + 全部 runtime（Win 20 個 DLL；Linux 57 個 .so）+ 翻譯資產 + 字型 + X-COM 1 原始遊戲資料（10 MB）+ portable launcher + 預設 zh-TW + 1280×800 設定。
+
+Linux AppImage 用 `appimagetool` 打包，存檔路徑自動指向 `$XDG_DATA_HOME/openxcom-cht/` 與 `$XDG_CONFIG_HOME/openxcom-cht/`，不污染 OS。
 
 僅供**已擁有正版 X-COM 1**的玩家私人保存使用，內含原始遊戲資料（10 MB），版權屬 MicroProse / 2K Games，不可公開散布。
 
@@ -263,6 +272,7 @@ OpenXcom 本體繼承上游 GPL-3.0。Source patch 同樣 GPL-3.0。翻譯內容
 
 - [`GLOSSARY_1994_MANUAL.md`](docs/GLOSSARY_1994_MANUAL.md) — 1994 第三波官方手冊 vs 本專案譯名對照（200+ 條）
 - [`ux_color_v2_designer.md`](docs/ux_color_v2_designer.md) — UFOpaedia 文字色 v2 配色 root cause（PaletteShift `dest = color + src*mul` 公式）+ 兩種背景兩種選色推導
+- [`signature_design.md`](docs/signature_design.md) — 主選單作者簽名 chibi pixel art 設計說明（layout / palette / 像素佈局 / rationale）
 - [`v2_plan.md`](docs/v2_plan.md) — 4 階段路線圖（v2.1 → v2.4）
 - [`v2_review.md`](docs/v2_review.md) — v2 全 round design review（1 356 keys）
 - [`SHIP_FINAL_V212.md`](docs/SHIP_FINAL_V212.md) — v2.12 ship final report
