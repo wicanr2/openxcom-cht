@@ -7,6 +7,19 @@
 
 > [OpenXcom](https://github.com/OpenXcom/OpenXcom)（1994 經典策略遊戲 X-COM: UFO Defense 的開源重寫）的**繁體中文化專案**，包含字型、翻譯、UI patch、TFTD 海底支線。
 
+## Upstream
+
+| 項目 | 來源 |
+|---|---|
+| **上游專案** | [github.com/OpenXcom/OpenXcom](https://github.com/OpenXcom/OpenXcom) (master) |
+| **Fork 基準 commit** | `1edb0a5a` (2024-2025 era master) |
+| **Upstream license** | GPL-3.0-or-later |
+| **Patches 數量** | 5 個 `.cpp`（最小化原則，全在 `patches/src/`） |
+| **本地 build 位置** | `D:\openxcom\OpenXcom\` (含 v2.18 patched source) |
+
+本專案不 fork 上游、不 maintain 平行分支 — 只發佈 5 個獨立 patch 檔，
+任何人可在乾淨的 OpenXcom master clone 上覆蓋這 5 檔重新 build。
+
 ---
 
 ## 截圖
@@ -25,10 +38,18 @@
 
 **v2.18 UFOpaedia 文字色（兩種背景兩種配色）**：
 
-| 天空背景（craft article） | 黑底（craft weapon） |
+| UFOpedia 選單 | Skyranger 飛機介紹（天空） | Interceptor（紫天）|
+|---|---|---|
+| ![ufo_v2_menu](screenshots/ufopaedia_v2_menu.png) | ![ufo_v2_skyranger](screenshots/ufopaedia_v2_skyranger.png) | ![ufo_v2_interceptor](screenshots/ufopaedia_v2_interceptor.png) |
+
+| 加農炮（黑底）| 武器介紹 |
 |---|---|
-| ![ufo_v2_skyranger](screenshots/ufopaedia_v2_skyranger.png) | ![ufo_v2_cannon](screenshots/ufopaedia_v2_cannon.png) |
-| `blockOffset(14)+10`=234 → 235..239 deep brown ramp | vanilla `+15`=239 → 240..244 light blue ramp |
+| ![ufo_v2_cannon](screenshots/ufopaedia_v2_cannon.png) | ![ufo_v2_craftweapon](screenshots/ufopaedia_v2_craftweapon.png) |
+
+配色推導：
+- 飛機 article（天空背景）：`blockOffset(14)+10`=**234** → ramp 235..239 deep brown `#7C5440..#503020` (L=93→55)
+- 武器 article（黑底）：vanilla `blockOffset(14)+15`=**239** → ramp 240..244 light blue `#A0B8D8..#2C3C4C` (L=180→57)
+- 根因：X-COM `Text::setColor()` 是 ramp 基底，真實顯示色落在 `[color+1..color+5]` — 見 [`docs/ux_color_v2_designer.md`](docs/ux_color_v2_designer.md)
 
 ---
 
@@ -48,6 +69,33 @@
 ---
 
 ## 安裝
+
+### 方式 0：Portable ZIP（最簡單）
+
+不必 build、不必裝 Steam、不必裝 VC++ Redist — **整包雙擊就跑**。
+
+僅供**已擁有正版 X-COM 1**的玩家私人保存使用，內含原始遊戲資料（10 MB），版權屬 MicroProse / 2K Games，不可公開散布。
+
+GitHub repo 本身**不收** ZIP（避免版權與檔案大小爭議）。如何自製：
+1. 走方式 B build EXE
+2. 取得正版 X-COM 1 資料（Steam: `XCom UFO Defense\XCOM\` 9 個子目錄）
+3. 用 `tools/make_portable.ps1`（待加）或手動依下面結構打包
+
+```
+OpenXcom-CHT-v2.18-portable\
+├── openxcom.exe + 20 個 DLL
+│   (SDL / yaml-cpp / libpng / libogg / libvorbis / libwebp / libFLAC ...
+│    MSVCP140 / VCRUNTIME140 / VCRUNTIME140_1)
+├── OpenXcom-CHT.cmd          ← portable launcher，-data data -user user -config user
+├── README.txt                ← 中文使用說明
+├── data\common\              ← OpenXcom 通用資源 + 字型 + 翻譯
+├── data\standard\            ← xcom1/xcom2 mods
+├── data\UFO\                 ← 原版 X-COM 1 遊戲資料（需自備）
+└── user\options.cfg          ← 預設 zh-TW + 1280x800
+```
+
+第一次啟動實測：`Display set to 1280x800x8` + `Language loaded successfully` ✓
+解到任意路徑（包含中文路徑）皆可運作。
 
 ### 方式 A：把翻譯資產 drop 進 OpenXcom data 目錄
 
