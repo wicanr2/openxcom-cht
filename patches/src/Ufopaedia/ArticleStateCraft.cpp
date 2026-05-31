@@ -54,13 +54,27 @@ namespace OpenXcom
 		_btnPrev->setColor(Palette::blockOffset(15)-1);
 		_btnNext->setColor(Palette::blockOffset(15)-1);
 
-		// zh-TW UX fix: original index 239 (blockOffset(14)+15) is a pale
-		// pink/cream in PAL_UFOPAEDIA which clashes with the sky/cloud
-		// background of UP004.SPK (Skyranger).  Switch to blockOffset(15)+15
-		// (index 255 = darkest entry, used elsewhere as black) for max
-		// contrast against light backgrounds.  Title uses +12 (dark
-		// brown/charcoal) to keep some vintage warmth but still readable.
-		_txtTitle->setColor(Palette::blockOffset(15)+15);
+		// zh-TW UX fix v2 (designer pass):
+		//   * vanilla blockOffset(14)+15  = idx 239 = #503020 warm brown (L=55)
+		//       -> on UP004.SPK sky+cloud (L=130..230) contrast OK for english
+		//          stroke but 12x12 CJK strokes vanish.
+		//   * v1 attempt blockOffset(15)+15 = idx 255 = #A4C068 LIGHT yellow-
+		//       green (L=173) -- block 15 in PAL_UFOPAEDIA is NOT a black ramp
+		//       like other blocks, the upper half (252-255) is a pale lime
+		//       sequence. That is why "255" looked invisible: similar luminance
+		//       to the cloud background.
+		//   * v2 choice: blockOffset(15)+9 = idx 249 = #14282C dark teal
+		//     (L=34.5) in PAL_UFOPAEDIA. The same index is #0C3054 dark navy
+		//     (L=41.3) in PAL_BATTLEPEDIA (used by craft weapon screen). Both
+		//     are dark cool neutrals that contrast strongly with the sky
+		//     palette (cloud bytes 32,128,129,130,133-141 all have L>=115).
+		//   * secondary keeps blockOffset(15)+4 = idx 244 = #1C1C20 deep
+		//     neutral so stat values remain distinguishable from labels.
+		//   * setHighContrast(true) thickens the AA edge (mul=3 in Text.cpp),
+		//     which on a dark-on-light layout reinforces the outline of CJK
+		//     strokes against the sky.
+		_txtTitle->setColor(Palette::blockOffset(15)+9);
+		_txtTitle->setHighContrast(true);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
 		_txtTitle->setText(tr(defs->title));
@@ -68,7 +82,8 @@ namespace OpenXcom
 		_txtInfo = new Text(defs->rect_text.width, defs->rect_text.height, defs->rect_text.x, defs->rect_text.y);
 		add(_txtInfo);
 
-		_txtInfo->setColor(Palette::blockOffset(15)+15);
+		_txtInfo->setColor(Palette::blockOffset(15)+9);
+		_txtInfo->setHighContrast(true);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
 		_txtInfo->setText(tr(defs->text));
@@ -76,8 +91,9 @@ namespace OpenXcom
 		_txtStats = new Text(defs->rect_stats.width, defs->rect_stats.height, defs->rect_stats.x, defs->rect_stats.y);
 		add(_txtStats);
 
-		_txtStats->setColor(Palette::blockOffset(15)+15);
+		_txtStats->setColor(Palette::blockOffset(15)+9);
 		_txtStats->setSecondaryColor(Palette::blockOffset(15)+4);
+		_txtStats->setHighContrast(true);
 
 		std::ostringstream ss;
 		ss << tr("STR_MAXIMUM_SPEED_UC").arg(Unicode::formatNumber(craft->getMaxSpeed())) << '\n';

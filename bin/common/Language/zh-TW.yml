@@ -253,7 +253,7 @@ zh-TW:
   STR_SNEAKYAI: "鬼祟 AI"
   STR_SNEAKYAI_DESC: "AI 盡量避免暴露自身於玩家視線中。"
   STR_STRAFE: "替代移動方式"
-  STR_STRAFE_DESC: "按住 CTRL 啟用側移、奔跑與獨立坦克砲塔旋轉。"
+  STR_STRAFE_DESC: "按住 CTRL 啟用側移、奔跑與獨立坦克炮塔旋轉。"
   STR_BATTLEEXPLOSIONHEIGHT: "爆炸高度"
   STR_BATTLEEXPLOSIONHEIGHT_DESC: "改變爆炸在高度上擴散的程度。{NEWLINE}（扁平：0；圓形：3）"
   STR_AUTOSAVE: "自動存檔"

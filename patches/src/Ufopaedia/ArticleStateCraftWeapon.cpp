@@ -55,10 +55,14 @@ namespace OpenXcom
 		_btnPrev->setColor(Palette::blockOffset(1));
 		_btnNext->setColor(Palette::blockOffset(1));
 
-		// zh-TW UX fix: see ArticleStateCraft.cpp — original index 239 is
-		// pale and clashes with sky/cloud craft weapon backgrounds; promote
-		// to index 255 (darkest entry in PAL_BATTLEPEDIA) for contrast.
-		_txtTitle->setColor(Palette::blockOffset(15)+15);
+		// zh-TW UX fix v2 (designer pass): see ArticleStateCraft.cpp for full
+		// rationale. v1 picked idx 255 assuming it was the darkest entry, but
+		// in PAL_BATTLEPEDIA idx 255 is also #A4C068 pale lime (L=173.6) --
+		// invisible against sky imagery. v2 uses blockOffset(15)+9 = idx 249
+		// = #0C3054 dark navy (L=41.3) in PAL_BATTLEPEDIA. setHighContrast
+		// thickens AA so CJK strokes carry an outline against the sky.
+		_txtTitle->setColor(Palette::blockOffset(15)+9);
+		_txtTitle->setHighContrast(true);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
 		_txtTitle->setText(tr(defs->title));
@@ -66,7 +70,8 @@ namespace OpenXcom
 		_txtInfo = new Text(310, 32, 5, 160);
 		add(_txtInfo);
 
-		_txtInfo->setColor(Palette::blockOffset(15)+15);
+		_txtInfo->setColor(Palette::blockOffset(15)+9);
+		_txtInfo->setHighContrast(true);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
 		_txtInfo->setText(tr(defs->text));
@@ -75,7 +80,8 @@ namespace OpenXcom
 		add(_lstInfo);
 
 
-		_lstInfo->setColor(Palette::blockOffset(15)+15);
+		_lstInfo->setColor(Palette::blockOffset(15)+9);
+		_lstInfo->setHighContrast(true);
 		_lstInfo->setColumns(2, 180, 70);
 		_lstInfo->setDot(true);
 		_lstInfo->setBig();
