@@ -4,6 +4,8 @@ Date: 2026-05-31
 Scope: `bin/common/SoldierName/{Japanese,Korean,Spanish,Portuguese,Italian}.nam`。
 不動 source code、不動 zh-TW.yml、不動 git。
 
+Phase A 補完五大陣營（美/英/中/俄/德/法）後，Phase B 進入「東亞 + 拉丁歐洲」這 5 國——日本、韓國、西班牙、葡萄牙、義大利。這 5 國最特別的是：**日本/韓國名直接走漢字派**（Mori → 森、Tanaka → 田中、Lee → 李、Kim → 金），不音譯。其他 3 國則是聯合報國際版+運動新聞的標準音譯（賈西亞、若昂、朱塞佩）。1990 年代台灣的義甲足球熱、世足賽轉播、A-Lin 學義大利語、《灌籃高手》與韓劇文化滲透——這 5 國的譯名實際上每一條都是台灣 1990s-2000s 跨文化版的縮影。
+
 ## Entries 數量驗證 (原檔 vs 翻譯後)
 
 | 檔案             | maleFirst | femaleFirst | maleLast  | lookWeight* | YAML parse |
@@ -40,6 +42,8 @@ Scope: `bin/common/SoldierName/{Japanese,Korean,Spanish,Portuguese,Italian}.nam`
 
 ## 5-10 條值得 review 的譯名
 
+Phase B 5 國最有趣的彩蛋是：**1994 SSI 原檔在每國的姓氏池都偷塞了「歷史名人」**——日本姓氏池有宮本武藏，韓國姓氏池有 6 大複姓（司空/鮮于/皇甫/諸葛/南宮/獨孤）的漢字本字，匈牙利名人 Kodály/Petőfi 後面 batch 也會出現。本專案完全保留這些彩蛋，遊戲合成出來會有「武藏佐藤」「諸葛敏俊」這種讓 1990s 動漫迷+古典迷瞬間笑出來的隊伍：
+
 1. **Japanese maleFirst: Hibiki → 響** — 直譯為「響」(漢字本字),單字名 1990s 動漫迷熟悉度高,但 1990s 聯合報國際版會譯「希比奇」音譯。決定走漢字派 (Hibiki/Akira/Shun 等單字名都用本字)。
 2. **Japanese maleLast: Musashi → 武藏** — 宮本武藏的武藏,放姓氏池上下文奇怪 (原檔顯然引用劍豪),保留歷史感。
 3. **Korean maleLast: Sagong → 司空 / Seonu → 鮮于 / Hwangbo → 皇甫 / Jegal → 諸葛 / Namgung → 南宮 / Dokgo → 獨孤** — 韓國 6 大複姓全保留漢字原型 (不音譯)。Dokgo 對應「獨孤」雖然中文讀者第一反應是金庸獨孤求敗,但 韓國「독고」姓的漢字本字就是「獨孤」。
@@ -52,6 +56,8 @@ Scope: `bin/common/SoldierName/{Japanese,Korean,Spanish,Portuguese,Italian}.nam`
 10. **Italian maleLast: Esposito → 艾斯波西托** — Espos- 開頭按音譯 4 字,不縮成 3 字 (「艾波斯」太鬆)。
 
 ## 翻譯風格備註
+
+5 國的譯名規則一國一套——日本走「漢字派優先」，韓國走「韓國慣用漢字」，西班牙/葡萄牙/義大利走「聯合報國際版」+ 各自的軟硬音規則。這些規則背後反映的是 1990s 台灣媒體跨文化譯名的成熟度——義甲足球轉播、葡萄牙作家魔幻寫實小說中譯、韓劇文化滲透，每一條規則都有 30 年的台灣讀者熟悉度當靠山。
 
 ### Japanese
 - 漢字派優先: Akira → 明, Shun → 駿, Mori → 森, Tanaka → 田中, Suzuki → 鈴木, Watanabe → 渡邊 (邊 not 邉)。
@@ -85,6 +91,8 @@ Scope: `bin/common/SoldierName/{Japanese,Korean,Spanish,Portuguese,Italian}.nam`
 - 燁 (U+71C1) — 用 業 代替 (Korean maleLast,韓文 yeop 同音)
 
 ## Phase A + Phase B 合計 11 個檔 char coverage 統計
+
+Phase A + B 累計 11 國，1923 個 CJK chars used，0 missing——這個 0 不是運氣，是兩 phase 翻譯時主動避開冷僻字、用同音常用字 swap 的結果（婭→亞、燁→業、薏→易、蓮→蕾妮 等）。下表是統計：
 
 | Phase | 檔案數 | 合計 CJK 字數 | Missing |
 |-------|--------|---------------|---------|

@@ -5,6 +5,8 @@
 **Build target**: Linux `/tmp/openxcom-linux-build/` (incremental `make openxcom -j8`)
 **前置條件**: v2.21 7 patches 已 land 並 PASS
 
+如果說 v2.21 是 widget clip 修整的「微整型」階段——拉拉皮、剪剪眼角、9 個畫面動一兩 pixel——那 v2.22 就是動真格的「大手術」階段。三個畫面：**BaseInfoState 26 widgets 連動**（Personnel + Space + Defense 三段全部要升 h、降 y、bar 跟著 -1）、**MonthlyReportState 整段行距 8→13**（月末 popup 從頭排到尾）、**GeoscapeCraftState 攔截 popup 7 列重排**（速度/高度/燃料/武器/彈藥 全部下移 +2）。1994 SSI 設計師當年把這幾個畫面壓到「每個像素都有用」的密度，**30 年後我們在不能加高度、不能換 widget 系統的限制下，把繁中 12 px 字硬塞進去**——這份 doc 是手術紀錄。
+
 ---
 
 ## Patch 表
@@ -16,6 +18,8 @@
 | **T3** | `src/Geoscape/GeoscapeCraftState.cpp` | 63-75 | 12 widgets h 9→11, 行距 8→10；y 序列 52,60,68,76,84,92,100 → 52,62,72,82,92,102,112；`_txtSoldier/HWP` 對齊 MaxSpd/Altitude row；`_txtRedirect` (h=17 big) y=108 保持原狀 (條件式 overlay) | **PASS** |
 
 **全 3/3 Linux incremental build PASS** — 0 compile error, 0 link error。
+
+3 個 patch 看起來各自獨立，實際共用一套核心策略：**audit doc §8 的「甜蜜點 h=11」**——h=9 字底切、h=13 撞下列、**h=11 是中間平衡點**。但這個甜蜜點只在 BaseInfoState（行距 11 固定）成立；MonthlyReportState 行距太緊只能上 h=13 + 全列重新均勻分配；GeoscapeCraftState popup 太擠連 h=11 都嫌大，得壓到 h=11 + 行距 10 = -1 px overlap 靠字型 1 px clip buffer 撐。**這就是 3 個畫面 3 套折衷，每一套都是審 1994 SSI 的座標系統審到第三層才看出來的細節**。
 
 ---
 
@@ -133,6 +137,8 @@ y=124 _btnBase  → gap=1 px from W2 底邊 123
 
 ---
 
+三個 ASCII y-layout 看下來，最讓人感慨的是 1994 SSI 設計師的精準度——BaseInfoState 26 widgets 的 11 px pitch 一行不亂、enforced/!enforced 模式雙路徑同步、`_bar` 嵌入 `_txt` 的 +2 offset 30 年沒人改過還是 work。我們現在所有的 reflow 都是在他們留下的格線上微調，**沒有重新發明，只是用 30 年後的中文字身去適配 30 年前的英文 9 px 格框**。
+
 ## 視覺 review 優先級
 
 1. **T1 BaseInfoState** (最高優先) — 26 widgets 連動，**h=11 + 11 px 行距 = 0 gap**。字身緊貼相鄰列上緣。若視覺感「行距過密」或字底毛邊明顯 → fallback h=10 (audit 表並未推薦但仍保 1 px gap)。**最痛點: bar 與 text 視覺對齊**，bar y=text y+2, h=5；text 升到 h=11 後 bar 應仍在 text 中段（text 內部 y2~y7 是字身，bar y2~y6 5 px 落在字身上 → 視覺重疊可能輕微）。
@@ -185,3 +191,5 @@ y=124 _btnBase  → gap=1 px from W2 底邊 123
 2. 若全 OK → main session 統一 git commit (v2.21 7 patches + v2.22 3 patches)
 3. 若 T1 _bar 視覺問題明顯 → v2.23 fallback 方案：h=10 全升保 1 px gap
 4. 若 T2 _txtDesc 截行 → v2.23 重新評估 (考慮 h 117→112 但拉 desc 底邊到 188 接近 _btnBigOk y=174)
+
+v2.21 + v2.22 共 10 個 patch 落地後，X-COM 1994 widget 系統的繁中 reflow 算是踩完了 80% 的雷。剩下 20% 是「條件式 overlay big-font widget」（如 `_txtRedirect`）這種只在特定遊戲狀態出現的場景——只能靠玩家實際玩到那關時截圖回報。**這份手術紀錄留給後續 v2.23+ 的 agent 當底圖**，不要重蹈三輪 audit 才搞清楚 §2 vs §8 矛盾的覆轍。

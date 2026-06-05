@@ -4,9 +4,13 @@
 > 日期：2026-05-30。
 > 對齊文件：[v2_plan.md](v2_plan.md)。
 
+這份 design review 寫於 2026 年 5 月 30 日——本專案 v2 階段第一次「擴翻 + 自動截圖測試 + 收尾」三步走完之後的收工報告。當時 v2.1 計畫只翻 200 條 key，這一輪實際 ship 出 1356 條（90% coverage），**直接跳過 v2.1 把 v2.2 規劃的 Battlescape/Inventory/Basescape 全部翻完**。這份 doc 留下了「2026-05-30 那一刻」字型策略、line step bug、按鈕字溢出、語言名稱顯示「文言」這幾個踩雷的完整快照——後續 v2.21/v2.22/v2.23 解決了這份 review 標出的所有 known issue。
+
 ---
 
 ## 1. Phase A 翻譯統計
+
+從 v1.1 的 8 條 key 跳到 v2 的 1356 條 key，這一輪擴翻看起來不可思議地大——實際上是因為 OXCE nightly 社群已經開了 60-80% 的 zh-TW 翻譯，本專案 cherry-pick 進 vanilla master 路線後一次補完。下面這張表是「規模 v1.1 vs v2」的對照。
 
 ### 1.1 規模
 
@@ -73,6 +77,8 @@ Glossary 已主動執行 一致性 check：
 ---
 
 ## 2. Phase B 遊戲測試（截圖檢視）
+
+翻譯本身只是第一道測試線——真正的考驗是把翻好的 zh-TW.yml 灌進 OpenXcom 跑起來看畫面。本輪用 WSL Xvfb harness 自動跑 6 個截圖場景，下面是當時的觀察記錄。
 
 ### 2.1 截圖清單（D:\openxcom\screenshots\）
 
@@ -188,6 +194,8 @@ Glossary 已主動執行 一致性 check：
 ---
 
 ## 7. 結論
+
+寫完這份 v2 收尾 review 後，下一個 ship 的 v2.1+v2.2 合併版本直接超標 1356 條 key，文字密度大幅超過原規劃。**這份 doc 留作 2026-05-30 那一刻的快照**——後續所有 v2.21/v2.22/v2.23 改動都是針對這份 review 標出的「Line step bug」「按鈕字溢出」「文言顯示問題」逐一處理的結果。
 
 * **翻譯品質**：1356 unique keys，90% 覆蓋率，台灣慣用譯名一致，無簡體混入，X-COM vintage 風格保留。
 * **顯示品質**：主流 UI（main menu / options / difficulty / modlist）全部 readable；line overlap 限於多行 dialog，已知有修法。

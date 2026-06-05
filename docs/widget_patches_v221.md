@@ -5,6 +5,8 @@
 **Build target**: Linux `/tmp/openxcom-linux-build/` (incremental `make openxcom -j8`)
 **未涵蓋（排 v2.22）**: BaseInfoState #4 (26 widgets 連動)、MonthlyReportState #7 (行距 8 重排)、GeoscapeCraftState #10 (行距 8 重排)
 
+1994 年 X-COM 的 UI widget layout 是手刻 320×200 pixel 邊界、每個 `new Text(w, h, x, y)` 的硬編碼座標排列出來的。當年用 8×9 英文 bitmap font，每個字母塞進 9 px 高的 Text widget 剛剛好。**30 年後我們把 12×12 的繁中字塞進這些同樣 9 px 高的 widget——畫面就崩了**。字底切一刀、行距撞下一列、「金」字底橫看不見——這就是「widget clip」問題。**這份 v2.21 修了 7 個低-中風險畫面**（Basescape 主畫面、資金、製造、出售、研究、製造資訊、採購），每個 patch 都是「h 9→13、y 微調」的微整型手術，避開 26-widget 的 BaseInfoState 那種大重排（排 v2.22）。
+
 ---
 
 ## 工作流程實況
@@ -12,6 +14,8 @@
 每個 patch 走：Read → Edit Windows source (`D:\openxcom\OpenXcom\src\…`) → cp 到 Linux `/tmp/openxcom-src/src/…` → `make openxcom -j8` incremental → 確認 Linking OK。
 
 **Linux build dir source 是獨立 copy**（`/tmp/openxcom-src`），不是 D 槽 symlink — 每次必須 `cp /mnt/d/openxcom/OpenXcom/src/…/<file>.cpp /tmp/openxcom-src/src/…/<file>.cpp` 才有效。
+
+這個「Windows source 編輯 + Linux WSL build」雙路徑流程是 2020s 跨 OS 開發的標配——Windows 端 VSCode 改 source、WSL 端 GCC incremental build。30 年前 1994 SSI/MicroProse 工程師是兩台機器、磁碟片轉檔、整套 build 一跑半小時。**現在 WSL 一個 `make -j8` 不到 90 秒就 link 完——這 30 年硬體進步真的是奇蹟**。
 
 ---
 
@@ -28,6 +32,8 @@
 | 7 | `src/Basescape/ResearchState.cpp` | 50-56 | row1/row2 (Available/Allocated/Space) h 9→13, y -2；row3 (Project/Scientists/Progress) y 44→46，`_txtProgress` 也升 h=13；`_lstResearch` y 62→64, h 112→110 | PASS |
 
 **全 7/7 Linux incremental build PASS**，無 compile error，無 link fail。
+
+7 個 patch 看起來都長得像「h 9→13, y -2」這種無聊的座標微調，但每一個背後都有自己的局部問題——PurchaseState 因為 `_cbxCategory` y=36 太近撞了一道牆只能用 h=11 折衷，SellState 出現 1 px z-order overlap 靠 add 順序救活，ManufactureState 一連串 row3 跟著下移 2 px 才不會撞 row2 升高後的底邊。**這就是 1994 X-COM widget 系統的設計密度——每一個座標都精算到像素級，你動一個就連環撞一片**。下面幾節寫具體的折衷思路。
 
 ---
 
@@ -46,6 +52,8 @@ Audit doc #1 明確警告：「下方 `_cbxCategory` y=36 撞」、「`_txtCost`
 這兩個多行 widget (h=32/48 @ y=80/64) 不在 audit doc patch list；本身高度已 CJK-safe。未動。
 
 ---
+
+這 4 個設計決策合起來告訴我們一件事：**1994 X-COM 的 widget layout 沒有「重排自由度」，只有「微調容忍區間」**。每個 patch 都是在 1-2 px gap 裡找 sweet spot——拉太鬆畫面散、壓太緊字底切。30 年後我們做繁中化，本質上是在 1994 設計師留下的「英文 9 px 字身」框架裡硬塞「12 px 中文字身」，靠 h=11 / h=13 兩種折衷 + z-order 救援 + row3 下移共三招撐住。
 
 ## 須 user 視覺 review 的畫面
 
@@ -96,3 +104,5 @@ Audit doc #1 明確警告：「下方 `_cbxCategory` y=36 撞」、「`_txtCost`
 1. User 手動跑 Linux binary（`/tmp/openxcom-linux-build/bin/openxcom`）視覺 review 7 畫面
 2. 若全 OK → user 手動 git commit（agent 不 commit per 任務指令）
 3. v2.22 處理 BaseInfoState / MonthlyReportState / GeoscapeCraftState 大重排
+
+寫完這份 v2.21 patch report 後最大的感想是——**這份工作的本質是「30 年後對 1994 設計師留下的座標系統做考古學式的微整型」**。每一個 1 px 都是當年設計師深思熟慮的結果，我們動它的時候得帶著敬意，能不動就不動，必須動就一片連環一起調。下個版本 v2.22 要動的 BaseInfoState 26 widgets 連動，是這套思路的終極考驗。

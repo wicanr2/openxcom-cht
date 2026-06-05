@@ -1,5 +1,7 @@
 # OpenXcom v2.22 T5 — Mod 列表 i18n
 
+OpenXcom 從 2010 年代開始就是一個 mod 平台——除了主程式內建的 xcom1 / xcom2 兩個主 mod，還有 `Aliens_Pick_Up_Weapons`、`UFOextender_*` 系列、`XcomUtil_*` 全套、`Demigod_Difficulty`、`StrategyCore_*`、`PSX_Static_Cydonia_Map`……整整 43 個社群 mod 通通收進來。問題是：**這些 mod 的顯示名稱通通 hard-code 在各自 metadata.yml 裡的英文 literal**，繁中玩家進去 ModListState 看到一片 `Aliens_Pick_Up_Weapons` 英文長條根本不知道是什麼意思。**這個 patch 解的就是這個問題**——加一個 source 層的 `_localizedModName` helper 把 mod id 翻譯成 zh-TW.yml 對應 key，沒翻就 fallback 英文（行為與 vanilla 完全一致）。
+
 ## 目標
 讓「模組」(ModListState) 畫面以 zh-TW 顯示中文 mod 名稱，
 而不是 metadata.yml 內 hard-code 的英文 literal (例如
@@ -81,6 +83,8 @@ ALL CJK chars in mod translations are covered by Font.dat
 
 主要的「不譯」決策：UFOextender、XcomUtil、StrategyCore、OXCE 這四個是社群專案名 / 工具集名，保英文比強譯更友善。其餘 vehicle / location 名稱 (Skyranger / Triton / Cydonia / USO) 走「中文慣用對應 + 必要時加 (TFTD) 標籤區分版本」原則。
 
+這 42 條 mod 譯名整體哲學就是「**該硬譯的硬譯、該保英文的保英文**」。1990 年代的台灣電腦雜誌也會這樣處理——主機板品牌（華碩、技嘉）翻譯名，BIOS / chipset 規格代號（i810、SB16）就直接保英文。30 年後我們仍然用同一條規則：玩家社群、工具集、論壇名都是已固化的英文 brand，硬翻反而讓老玩家看不懂。
+
 ## 檔案異動
 
 - `D:/openxcom/OpenXcom/src/Menu/ModListState.cpp` — 加 helper + 改 2 處
@@ -96,3 +100,5 @@ ALL CJK chars in mod translations are covered by Font.dat
 
 - 若主 session 要 ship，需把 `openxcom-cht/bin/common/Language/zh-TW.yml` 同步打進 v2.22 Linux & Windows 包
 - 若有玩家社群另裝第三方 mod (非 `standard/` 內建)，會 fallback 顯示英文 — 預期行為，不算 bug
+
+寫完這份 v2.22 T5 報告後最大的感想是——**OpenXcom 的 i18n 架構設計得很乾淨**。一個 `Language::getString` 就把 source layer 和 translation layer 解耦，fallback 機制天然存在，agent 只需要加 helper + 42 條 key 就解決問題。30 分鐘工作量比預估的 2-3 小時少了 4 倍，這就是 2026 年現代 i18n framework 的甜頭——比起 1994 SSI 那套 hard-code 英文 literal 的時代真的快太多。

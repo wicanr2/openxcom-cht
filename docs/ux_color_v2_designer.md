@@ -1,5 +1,7 @@
 # OpenXcom UFOpaedia 文字色修復 v2 (designer pass)
 
+這份 doc 記錄的是 OpenXcom 繁中化 v2.x 過程中一個**整整三輪 agent 才解開**的調色盤踩雷——UFOpaedia 載具條目（Skyranger / Interceptor / Lightning / Avenger / Firestorm）打開後，中文標題與描述文字**會直接消失在淡藍色雲彩背景裡**，肉眼根本看不見字。前兩輪 agent 都以為是「換個顏色就好」，第三輪坐下來把 X-COM 1994 的 `PaletteShift::func` 渲染公式從 `src/Interface/Text.cpp:466` 一行一行讀完才發現：**widget 的「color」屬性根本不是文字顏色，而是 5 階 ramp 的基底 index**，真正出現在螢幕上的 5 個 pixel index 是 `color + 1 .. color + 5`。1990 年代 X-COM 那套 8-bit palette 渲染美學，30 年後在 OpenXcom 開源碼裡仍然咬人——這份 doc 就是給後續 designer 留的踩雷地圖。
+
 ## TL;DR
 
 - ArticleStateCraft (Skyranger / Interceptor / ...) 文字色：
@@ -11,6 +13,8 @@
   → PAL_BATTLEPEDIA 字 pixel 落 idx 240..244 = `#A0B8D8 .. #2C3C4C`
      light blue ramp (L=180→57)，對黑底 weapon 圖完美。
 - 不開 `setHighContrast()`（會把 ramp 散到別 block 變亂）。
+
+三句話 TL;DR 看似簡單，但底下的踩雷史血淚交織。下一節從渲染公式講起。
 
 ## 為什麼前兩輪都失敗 — palette 渲染公式
 
@@ -34,6 +38,8 @@ pixel value 1..5（anti-alias 漸層），`mul = 1` 預設 / `mul = 3` 開
 真正出現在螢幕的 5 個 palette index 是 `color + 1 .. color + 5`。
 
 選色必須讓 `[color+1 .. color+5]` 構成連續可讀漸層。
+
+看懂這個公式之後再回看前兩輪 agent 的失敗，會發現他們不是粗心，是被 1990s palette 美學的隱性 invariant 騙了——「color = 顏色 index」這個直覺在 32bpp 系統是對的，在 X-COM 1994 的 ramp shift 系統是錯的。完全不同典範。
 
 ## PAL_UFOPAEDIA 真實內容（前一輪 agent 誤判處）
 
@@ -77,6 +83,8 @@ luminance 接近天空，仍然看不清。
 
 (這個錯誤的 build 留下截圖 `wsl_uxv2_04_skyranger_article_yellow.png`
 但因為被覆寫了沒留實體 — 結論記在這。)
+
+前兩輪 agent 失敗的根因都是「沒去 dump 真實 PAL_UFOPAEDIA / PAL_BATTLEPEDIA 內容、直接用 PAL_BATTLESCAPE 的直覺猜」——這就像 1995 玩家不查《電腦玩家》攻略直接在 X-COM 第一張地圖鑽進外星人運兵艇後門，**保證團滅**。
 
 ## v2 final 選色推導
 
@@ -123,6 +131,8 @@ mul=3 會讓 src=1..5 各自落 +3, +6, +9, +12, +15 — 跨越 block 邊界
 深紫，234+12=246 teal，234+15=249 dark teal）— ramp 變雜色拼接，
 視覺紊亂。X-COM 用 contrast 是針對 Battlescape 黃字 vs 暗背景的
 特殊路線，不適合 dark-on-light layout。
+
+這個 234 深棕 ramp 與 vanilla 239 淺藍 ramp 並存的選色決定，是這次 designer pass 最關鍵的取捨。**Craft article 配 234 深棕對天空淡藍**——對比強、視覺穩、X-COM vintage warm look 延續；**Craft Weapon article 維持 vanilla 239 淺藍對黑底**——黑底上的淺藍 highlight outline 是 1994 原版設計，本來就沒壞別瞎改。
 
 ## 產出
 
@@ -176,3 +186,5 @@ user 確認 Linux 截圖效果可接受 → 跑 VS 2022 build (與之前 zh-TW f
    `interfaces.rul`），維持 source patch。
 3. 中文 12×12 字型 stroke 細是 root cause 的另一半 — 但 scope 不動
    font。深 ramp 已足夠補償，無需加粗。
+
+最後一段話留給後續想動 UFOpaedia 配色的人：**動之前必先 dump 該 article 用的 palette、跑 simulator 模擬 5 階 ramp**——這是 1990s X-COM 美學的「文獻學步驟」。直接拍腦袋換顏色保證踩三次雷才解出來，跟 1995 年我打 TFTD 不查《電腦玩家》就直接派魚叉去打龍蝦人一樣的下場。

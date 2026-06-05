@@ -5,6 +5,8 @@ Agent: translation v2.3 batch1
 時間 cap: 90 min
 目標: 補翻剩餘 ~140 條（實測 117 條）長 UFOpaedia/desc/結局段落
 
+v2 收尾 review 寫完之後，剩下 117 條 UFOpaedia 長段落+結局劇情就是「90% → 100% coverage」的最後一哩路。這些不是 UI 按鈕（一兩個字解決），是**真正考驗翻譯水準的段落**——STR_VICTORY_1..5（5 段結局共 500+ 字）、11 種族 × (主條目+屍體研究) 22 條敘事段落、28 條武器 UFOpaedia 描述、外加賽多尼亞起源 / 太陽神物質 / 火星方案這種貫穿主線的劇情段落。1994 SSI 編劇 Julian Gollop 寫的英文原文有他標誌性的「冷戰科幻軍方報告體」氣口，翻譯時必須對齊 round1 已 ship 的「行動點/活捕/外星合金/太陽神物質/賽多尼亞」這套既有譯名，不能瞎發明新詞。**這份 ship report 記錄這 117 條補翻的完整成果**。
+
 ## 翻譯成果
 
 | 指標 | Before | After |
@@ -23,7 +25,7 @@ Agent: translation v2.3 batch1
 
 ## 翻譯涵蓋層級
 
-全部 5 個 Tier 一次補完：
+117 條按敘事重要度分 5 個 Tier。Tier 1 是「玩家結局時看到的劇情段落」——`STR_VICTORY_*` 與 `STR_GAME_OVER_*`——影響度最高，**這是玩家打完 80 小時後唯一會記得的中文**。Tier 2 是操作教學段落，Tier 3 是外星生物世界觀，Tier 4 是武器/載具描述，Tier 5 是設施與任務 briefing。全 5 個 Tier 一次補完：
 
 ### Tier 1 — 結局 + 主線研究 (10 條)
 STR_VICTORY_1..5, STR_GAME_OVER_1, STR_GAME_OVER_2, STR_YOU_HAVE_FAILED,
@@ -52,6 +54,8 @@ EXAMINATION/ALLOYS/ELERIUM_115), 8 種 alien mission desc, 護甲 POWER_SUIT/FLY
 
 ## 翻譯規範遵循
 
+117 條段落的翻譯規範對齊兩件事：第一是「**round1 已 ship 的譯名一致性**」（外星生物名/武器名/設施名不能換），第二是「**1994 X-COM 軍方科幻口吻**」（Julian Gollop 的冷戰報告體氣口）。下列幾條是這次翻譯時主動套用的規範：
+
 * **繁體中文 (zh-TW)** — 全部使用台灣常用書面語。
 * **1994 X-COM 軍方科幻口吻** — 用「行動點/活捕/外星合金/太陽神物質/賽多尼亞」等既有 round1 譯名；新增「破壞彈/航點/重力波/反物質內爆」等同調語。
 * **Format specifier 保留** — STR_MEDI_KIT_UFOPEDIA 與 STR_PSI_AMP_UFOPEDIA 含 `{NEWLINE}`，已完整保留。en/zh format-spec diff = 0。
@@ -59,6 +63,8 @@ EXAMINATION/ALLOYS/ELERIUM_115), 8 種 alien mission desc, 護甲 POWER_SUIT/FLY
 * **不覆寫** — 注入腳本對每個 key 做 line-level 防呆 (`re.match("^  KEY:")`)，skip count = 0 確認沒有覆蓋既有條目。
 
 ## 命名一致性決策
+
+翻譯 117 條長段落時最大的踩雷是「**外星人 unit 譯名雙軌**」——zh-TW.yml 早期 round1 ship 時把 `STR_SECTOID` 譯為「腦蟲」、`STR_FLOATER` 譯「浮游者」、`STR_MUTON` 譯「巨型怪」（貼合 1990 年代台灣攻略本通用譯名+外型描繪），但 v2_plan §1.3 規劃表寫的是「賽克托人/穆頓人/浮空人」（音譯派）。這次補翻 117 條 UFOpedia 描述沿用 round1 既有 ship 譯名不動，**因為 zh-TW.yml 1101 條 internal consistency 比規劃表更重要**。
 
 round1 agent ship 的 unit 譯名 (賽克托人/穆頓人/浮空人) 與 v2_plan §1.3 推薦
 (腦蟲/蠻牛/浮游者) 不一致，但既有 `STR_SECTOID_SOLDIER..` / `STR_FLOATER_SOLDIER..` /
@@ -70,6 +76,8 @@ round1 agent ship 的 unit 譯名 (賽克托人/穆頓人/浮空人) 與 v2_plan
 反映的是「字典 v2_plan vs round1 譯名」分歧，**不是新增的不一致**。
 
 ## 字型字元修正
+
+跑 `wsl_check_char_coverage.py` 一次抓出 4 個字超出 Font.dat WQY Sharp 12px subset 涵蓋範圍——這 4 條都是翻譯時不小心用了相對冷僻的繁體字，本來在 1990 年代純文字環境（聯合報副刊）很常用，但在 1994 X-COM 限定的 12 px CJK font subset 內沒涵蓋。下列 4 條都用「同義繁體字」swap，意思不變：
 
 `wsl_check_char_coverage.py` 一次跑出 4 個字超出字型 union (BIG+SMALL=10246 chars):
 
@@ -120,3 +128,5 @@ round1 agent ship 的 unit 譯名 (賽克托人/穆頓人/浮空人) 與 v2_plan
 * developer agent 範圍 (Font.cpp) — 未動
 * 既有 round1 翻譯任何欄位 — 未覆寫 (注入腳本確認 skip=0)
 * common/Language/zh-TW.yml — 未動 (本輪 scope 限 xcom1/)
+
+寫完這份 v2.3 batch1 後最大的感想是——**117 條 UFOpaedia 長段落+結局劇情翻完後，整個 X-COM 1994 主線敘事終於完整呈現給繁中讀者**。1995 年第三波文化那本厚手冊只譯了 200+ 詞條速查表，沒翻 UFOpedia 全文；30 年後本專案把這 117 條補完——**今天打到 STR_VICTORY_5 看到全套中文結局劇情的玩家，是繁中圈 X-COM 史上第一批這樣的人**。

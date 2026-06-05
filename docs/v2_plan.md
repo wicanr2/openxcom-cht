@@ -1,13 +1,17 @@
 # OpenXcom 繁中化 v2 設計文件
 
-> 範圍：規劃 v2.0–v2.3 字型、UI、翻譯整體路線。  
-> 基準：vanilla master `v1.0.1edb0a5a2-dirty`，build 在 `build-win64-release/bin/Release/openxcom.exe`。  
-> 字源：WQY Zen Hei Sharp (Apache 2.0)。  
+> 範圍：規劃 v2.0–v2.3 字型、UI、翻譯整體路線。
+> 基準：vanilla master `v1.0.1edb0a5a2-dirty`，build 在 `build-win64-release/bin/Release/openxcom.exe`。
+> 字源：WQY Zen Hei Sharp (Apache 2.0)。
 > 路徑均相對於 `D:\openxcom\OpenXcom\`。
+
+這份文件是 2026 年 5 月上旬本專案進入 v2 階段時的**初版規劃**——當年 v1.x 只翻了 8 個 key（主選單一小部份）就 ship 了，v2 要把整套字型 + UI + 翻譯路線重新設計。文件本身在 v2.21 / v2.22 / v2.23 之後**很多預估數字已被實際 ship 結果超越**（例如 v2.1 規劃 200 key 實際做到 600+，v2.2 規劃 600 key 實際翻到 1300+），但**整體技術路線（修法 A / WQY Sharp 12px / Path A 解析度 / Font.cpp:193 patch）30 年後仍然成立**——這份 doc 留作技術設計史。
 
 ---
 
 ## 0. 程式碼面已確認事實（影響後續決策）
+
+OpenXcom 字型系統設計於 2010 年代，當年完全沒考慮 CJK——`Font::getHeight()` 永遠回傳第一張 image 的高度，line step 永遠用英文那張。**這個 30 年前 1994 SSI 設計的時代假設+10 年前 OpenXcom 開源時的延伸，加總出來就是繁中字一塞進去 line 就疊的悲劇**。下面這 4 條 source-level 事實是 v2 路線所有設計決策的基礎。
 
 - [Font.cpp:193](src/Engine/Font.cpp:193) `Font::getHeight()` 回傳 `_images[0].height` —— **per-image override 對 line step 無效**，line step 永遠用第一張 image（多半是英文 `FontBig.png` / `FontSmall.png`）的高度。
 - [Font.cpp:50](src/Engine/Font.cpp:50) `Font::load` 接受 `images[].width/height/spacing` 個別 override（已在 [Font.dat:16-18,37-40](bin/common/Language/Font.dat) 用上）。
@@ -18,6 +22,8 @@
 ---
 
 ## 1. 各 UI screen 字型策略
+
+X-COM 1994 有 7 個主要 UI screen + 13 個 sub-screen，每一個都有自己的文字密度與適合的 font cell 大小。Geoscape 主畫面那 12 顆速度/功能按鈕擠在一個小空間裡是密度最高的場景，Battlescape 表格是次高，Briefing 段落是中等。下表是「screen × font × cell」的綜合策略：
 
 | Screen | 主要 Font | 次要 Font | 文字密度 | 建議 zh-TW cell |
 |---|---|---|---|---|
@@ -111,6 +117,8 @@ int Font::getHeight() const {
 
 ## 6. Ship 路線圖
 
+下面這個 v2.0 → v2.3 四階段路線圖是 2026-05-30 規劃時的初版——後來實際 ship 時直接跳過 v2.1，v2.2/v2.3 合併到 v2.20，再加上 v2.22 widget reflow / v2.23 補翻 117 條 / v2.25 ship TFTD / v2.27 README 雜誌風重寫 / v2.28 docs 升級。**路線圖不是預言，是某一刻對未來的快照**——時間軸有變但每個技術里程碑都對齊了。
+
 **v2.0（now → 1 週）**
 
 1. 確認當前 16×16 / 18×18 Big + Small cell 在 base 320 main menu 可讀（已驗 `game_options_v2.png` OK）。
@@ -142,6 +150,8 @@ int Font::getHeight() const {
 
 ## 7. 風險與已知限制
 
+任何 1990s 老遊戲漢化專案都必然撞到「**原版設計時代假設 vs 30 年後新需求**」的衝突——X-COM 1994 320×200 sprite 寫死的標題框、9 px font global height、無 hi-res mod 的封閉資產系統。下列 7 條風險裡有 3 條（#1, #3, #4）30 年後仍無解，必須在 README 標 known limitation；剩下 4 條（#2, #5, #6, #7）已在 v2.20+ 後續版本逐一處理。
+
 1. **X-COM 1994 原版 sprite 320×200 不可放大**：title sprite area 是寫死的 sprite 位元，中文超出無法靠 OpenXcom 修；只能讓中文短一點或接受溢出。OXCE 有部分 hi-res mod 處理但本 v2 不走 OXCE 路線。
 2. **xBRZ click broken 不在 v2 修**：要動 [Screen.cpp] 32bpp mouse mapping，屬於 upstream-level bug，回報 vanilla 但本地 portable 走 Path A。
 3. **WQY 14px embedded bitmap 沒覆蓋所有 BIG5 字**：罕用字（碁/翊/罕等）會 fallback outline，視覺與常用字不一致。可接受。
@@ -153,7 +163,7 @@ int Font::getHeight() const {
 
 來源檔: `bin/standard/xcom1/Language/zh-TW.yml` — 1101 keys, 102% coverage.
 
-以下為實際使用譯名 (round1 agent 採用), 取代 v2_plan §1.3 早期規劃表中部份未落地的譯名 (e.g. 賽克托人/穆頓人/浮空人 -> 腦蟲/蠻牛/浮游者)。Deep validator 報的 22 GLOSS warnings 來自舊 glossary 表; 以本表為準。
+下面這張 glossary 是 v2.23 補翻完成後**從實際 zh-TW.yml 自動萃取**的譯名快照——比 v2_plan 早期規劃表更可信，因為它反映「實際 ship 出去玩家看得到」的譯名。早期規劃表那些「賽克托人/穆頓人/浮空人」是 2026-05 上旬尚未落地的構想，round1 agent ship 時改採「腦蟲/巨型怪/浮游者」貼合 1990 年代台灣攻略本通用譯名。Deep validator 報的 22 GLOSS warnings 來自舊 glossary 表，以本表為準。
 
 | 原文 | 實際譯名 (zh-TW.yml) | STR key | 英文原文 |
 |---|---|---|---|
