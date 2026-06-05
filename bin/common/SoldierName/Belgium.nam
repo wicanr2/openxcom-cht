@@ -1,0 +1,75 @@
+# Simplified: Belgium has two main languages regions, the
+# Flemish(Dutch) speaking part and the Walloon(French) speaking region.
+# This difference is reflected in the names. I used the 60% Flemish vs 40% French
+# ratio
+# Distribution of lastNames can be visualised at http://www.familienaam.be
+# 12 Flemish/8 French (names from statbel.fgov.be)
+lookWeights:
+  - 70
+  - 28
+  - 1
+  - 1
+maleFirst:
+  - 內森
+  - 沃特
+  - 塞普
+  - 羅伯
+  - 柯比
+  - 巴特
+  - 魯本
+  - 馬克
+  - 大衛
+  - 杰夫
+  - 埃米爾
+  - 羅威
+  - 皮耶
+  - 維克多
+  - 朱爾
+  - 里歐
+  - 馬蒂厄
+  - 埃米連
+  - 巴斯田
+  - 昆汀
+femaleFirst:
+  - 蘿特
+  - 卡托
+  - 茱莉
+  - 諾爾
+  - 艾爾絲
+  - 溫蒂
+  - 蘿拉
+  - 莎拉
+  - 夏綠蒂
+  - 艾瑪
+  - 瑪麗
+  - 麗莎
+  - 克拉拉
+  - 艾瑪
+  - 艾莉絲
+  - 露易絲
+  - 伊內絲
+  - 茱絲汀
+  - 蘿拉
+  - 露西
+maleLast:
+  - 彼得斯
+  - 揚森斯
+  - 馬斯
+  - 雅各布斯
+  - 威廉斯
+  - 默滕斯
+  - 克拉斯
+  - 沃特斯
+  - 哥森斯
+  - 德斯梅特
+  - 弗梅倫
+  - 波威爾斯
+  - 杜布瓦
+  - 蘭貝爾
+  - 馬丁
+  - 杜邦
+  - 西蒙
+  - 勒克萊爾
+  - 勒羅伊
+  - 勒瓊
+

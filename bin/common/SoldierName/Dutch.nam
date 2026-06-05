@@ -1,0 +1,68 @@
+# A good article about dutch firstnames can be found at
+# http://www.historischnieuwsblad.nl/nl/artikel/5849/voornamen-in-nederland.html
+lookWeights:
+  - 45
+  - 45
+  - 5
+  - 5
+maleFirst:
+  - 揚
+  - 皮特
+  - 亨克
+  - 彼得
+  - 漢斯
+  - 凱斯
+  - 威姆
+  - 柯爾
+  - 吉拉德
+  - 葛瑞特
+  - 約翰
+  - 魯迪
+femaleFirst:
+  - 安妮
+  - 艾瑪
+  - 瑪麗潔
+  - 米恩
+  - 威莉
+  - 伊娃
+  - 柯莉
+  - 蓮妮
+  - 格瑞潔
+  - 漢娜
+  - 蘇菲
+  - 安絲潔
+maleLast:
+  - 德容
+  - 揚森
+  - 德弗里斯
+  - 范德貝格
+  - 范戴克
+  - 巴克
+  - 揚森斯
+  - 菲瑟
+  - 史密特
+  - 邁爾
+  - 德博爾
+  - 穆德
+  - 德格魯特
+  - 博斯
+  - 佛斯
+  - 彼得斯
+  - 亨德里克斯
+  - 范柳文
+  - 德克爾
+  - 布勞威爾
+  - 德威特
+  - 戴克斯特拉
+  - 史密茲
+  - 德格拉夫
+  - 范德梅爾
+  - 范德林登
+  - 科克
+  - 雅各布斯
+  - 德漢
+  - 弗梅倫
+  - 范登霍伊維
+  - 范德文
+  - 范登布魯克
+  - 德布魯因
