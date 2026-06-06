@@ -182,8 +182,8 @@ zh-TW:
   STR_BRAVERY: "勇氣"
   STR_REACTIONS: "反應"
   STR_REACTIONS_SHORT: "反應>{ALT}{0}"
-  STR_FIRING_ACCURACY: "射擊準度"
-  STR_THROWING_ACCURACY: "投擲準度"
+  STR_FIRING_ACCURACY: "射擊命中"
+  STR_THROWING_ACCURACY: "投擲命中"
   STR_STRENGTH: "力量"
   STR_PSIONIC_STRENGTH: "分子控制強度"
   STR_PSIONIC_SKILL: "分子控制技能"
@@ -226,7 +226,7 @@ zh-TW:
   STR_LONG_RANGE_DETECTION: "廣域偵測"
   STR_TORPEDO_DEFENSES: "魚雷防禦"
   STR_GAUSS_DEFENSES: "高斯防禦"
-  STR_SONIC_DEFENSES: "聲波防禦"
+  STR_SONIC_DEFENSES: "音波防禦"
   STR_PWT_DEFENSES: "脈波魚雷防禦"
   STR_BOMBARDMENT_SHIELD: "壓力轟擊護盾"
   STR_MC_GENERATOR: "M.C. 干擾器"
@@ -257,7 +257,7 @@ zh-TW:
 
   # 外星海底種族
   STR_AQUATOID: "水族人"
-  STR_GILLMAN: "魚鰓人"
+  STR_GILLMAN: "鰓型人"
   STR_LOBSTERMAN: "龍蝦人"
   STR_TASOTH: "塔索斯"
   STR_CALCINITE: "鈣化體"
@@ -284,7 +284,7 @@ zh-TW:
 
   # === 外星屍體 ===
   STR_AQUATOID_CORPSE: "水族人屍體"
-  STR_GILLMAN_CORPSE: "魚鰓人屍體"
+  STR_GILLMAN_CORPSE: "鰓型人屍體"
   STR_LOBSTERMAN_CORPSE: "龍蝦人屍體"
   STR_TASOTH_CORPSE: "塔索斯屍體"
   STR_CALCINITE_CORPSE: "鈣化體屍體"
@@ -366,18 +366,18 @@ zh-TW:
   STR_HEAVY_GAUSS: "重型高斯"
   STR_HEAVY_GAUSS_CLIP: "重型高斯彈匣"
 
-  # 聲波武器 (Sonic)
-  STR_SONIC_CANNON: "聲波加農"
+  # 音波武器 (Sonic)
+  STR_SONIC_CANNON: "音波加農"
   STR_CANNON_POWER_CLIP: "加農能量匣"
-  STR_SONIC_BLASTA_RIFLE: "聲波爆裂步槍"
+  STR_SONIC_BLASTA_RIFLE: "音波爆裂步槍"
   STR_BLASTA_POWER_CLIP: "爆裂能量匣"
-  STR_SONIC_PISTOL: "聲波手槍"
+  STR_SONIC_PISTOL: "音波手槍"
   STR_PISTOL_POWER_CLIP: "手槍能量匣"
   STR_DISRUPTOR_PULSE_LAUNCHER: "干擾脈衝發射器"
   STR_DISRUPTOR_AMMO: "干擾脈衝彈"
   STR_THERMAL_SHOK_LAUNCHER: "熱擊發射器"
   STR_THERMAL_SHOK_BOMB: "熱擊彈"
-  STR_SONIC_PULSER: "聲波脈衝彈"
+  STR_SONIC_PULSER: "音波脈衝彈"
   STR_ZRBITE: "Z元素"
   STR_MC_READER: "M.C. 讀取器"
 
@@ -396,9 +396,9 @@ zh-TW:
   STR_GAUSS_CANNON: "高斯加農"
   STR_GAUSS_CANNON_UC: "高斯加農"
   STR_GAUSS_CANNON_AMMO: "高斯加農彈藥"
-  STR_SONIC_OSCILLATOR: "聲波振盪器"
-  STR_SONIC_OSCILLATOR_UC: "聲波振盪器"
-  STR_SONIC_WAVE: "聲波"
+  STR_SONIC_OSCILLATOR: "音波振盪器"
+  STR_SONIC_OSCILLATOR_UC: "音波振盪器"
+  STR_SONIC_WAVE: "音波"
   STR_PULSE_WAVE_TORPEDOES: "脈波魚雷彈藥"
 
   # === Armor ===
@@ -642,7 +642,7 @@ zh-TW:
   STR_DAMAGE_INCENDIARY: "磷光"
   STR_DAMAGE_HIGH_EXPLOSIVE: "高爆"
   STR_DAMAGE_LASER_BEAM: "高斯射束"
-  STR_DAMAGE_PLASMA_BEAM: "聲波射束"
+  STR_DAMAGE_PLASMA_BEAM: "音波射束"
   STR_DAMAGE_STUN: "凍結"
   STR_DAMAGE_MELEE: "近戰"
   STR_DAMAGE_ACID: "酸蝕"
@@ -848,7 +848,7 @@ zh-TW:
   STR_COELACANTH_GAS_CANNON: "腔棘魚/瓦斯加農"
   STR_COELACANTH_AQUA_JET: "腔棘魚/水噴流"
   STR_COELACANTH_GAUSS: "腔棘魚/高斯"
-  STR_DISPLACER_SONIC: "位移者/聲波"
+  STR_DISPLACER_SONIC: "位移者/音波"
   STR_DISPLACER_PWT: "位移者/脈波魚雷"
   STR_HWP_AQUA_JET_MISSILES: "水噴流魚雷"
   STR_HWP_DISPLACER_PWT: "脈波魚雷"
@@ -889,7 +889,7 @@ zh-TW:
   STR_CRAFT_GAS_CANNON_UFOPEDIA: "壓縮氣體驅動的加農系統，發射具有高穿甲能力的實心彈頭。"
   STR_PWT_CANNON_UFOPEDIA: "脈波魚雷採用超熱燃料系統與極密緻的彈頭，可貫穿大多數合金。"
   STR_GAUSS_CANNON_UFOPEDIA: "高斯武器是新開發的 X-Com 科技。其粒子加速器以小型液氮冷卻聚變反應爐驅動。"
-  STR_SONIC_OSCILLATOR_UFOPEDIA: "強力的聽覺震盪器產生聲波，藉由震動目標分子鍵將其摧毀。"
+  STR_SONIC_OSCILLATOR_UFOPEDIA: "強力的聽覺震盪器產生音波，藉由震動目標分子鍵將其摧毀。"
 
   # 設施
   STR_AIR_LOCK_UFOPEDIA: "氣密艙允許裝備與人員進出海底基地。它永遠是新基地最先建造的設施。氣密艙區域易受敵對勢力入侵。"
@@ -902,7 +902,7 @@ zh-TW:
   STR_GENERAL_STORES_UFOPEDIA: "所有裝備、武器系統、彈藥、回收物資與潛行武器系統皆存放於倉庫，包括分派給潛艇塢內潛艇的裝備。"
   STR_ALIEN_CONTAINMENT_UFOPEDIA: "活外星人需要特殊拘留設施。這些單位維持其生命系統並使其戰鬥力歸零。拘留設施可容納 10 個外星生命體。"
   STR_GAUSS_DEFENSES_UFOPEDIA: "高斯防禦是抵禦敵對潛艇攻擊的最新、最有效的防護。"
-  STR_SONIC_DEFENSES_UFOPEDIA: "聲波震盪器防禦提供強大而高效的反擊力。"
+  STR_SONIC_DEFENSES_UFOPEDIA: "音波震盪器防禦提供強大而高效的反擊力。"
   STR_PWT_DEFENSES_UFOPEDIA: "脈波魚雷是抵禦外星攻擊最有效的防禦。彈頭極密緻，可貫穿所有已知裝甲，其產生的磁波可癱瘓電子防禦。"
   STR_BOMBARDMENT_SHIELD_UFOPEDIA: "壓力轟擊護盾可阻止外星潛艇停靠基地，並建立共振場以持續排斥來犯潛艇，讓防禦系統有時間重複射擊。實際上可使既有防禦的效果加倍。"
   STR_MC_GENERATOR_UFOPEDIA: "由於外星潛艇利用分子控制科技偵測生命存在，使用負向 M.C. 發射器可在基地周圍建立難以穿透的屏蔽，混淆外星人並隱藏我方蹤跡。"
@@ -931,17 +931,17 @@ zh-TW:
   STR_VIBRO_BLADE_UFOPEDIA: "震動刃為長而銳利的高強度合金刀刃，以超過每分鐘 6000 轉旋轉，可破開最堅固的潛水裝甲。動力源為外星發明，我方早期仿製失敗，刀刃要不轉速太慢，要不在水壓下爆裂。"
   STR_THERMIC_LANCE_UFOPEDIA: "熱熔長矛是震動刃科技的延伸。刀刃高速旋轉，並由 Z 元素動力源加熱至超高溫，可如熱刀切奶油般切開裝甲。"
   STR_HEAVY_THERMIC_LANCE_UFOPEDIA: "重型熱熔長矛是熱熔長矛的強化版。雙熱源與更高轉速使其幾乎可貫穿所有材質。"
-  STR_SONIC_CANNON_UFOPEDIA: "聲波加農是聲波武器家族中最強的型號，配備高頻聽覺震盪器與比爆裂步槍更大的共鳴腔，並具備脈衝引爆系統，可調變超聲波以產生更有效的聲波震懾。"
-  STR_CANNON_POWER_CLIP_UFOPEDIA: "這款緊湊裝置作為聲波加農的彈藥使用，內含少量 Z 元素。"
-  STR_SONIC_BLASTA_RIFLE_UFOPEDIA: "更強力的聲波裝置，連高碳鋼也無法對其免疫。高度緊湊的波形發射器配備超導放大器以增強威力。"
-  STR_BLASTA_POWER_CLIP_UFOPEDIA: "這款小型物件作為聲波步槍的動力源，是一款強力的外星武器，內含少量 Z 元素。"
-  STR_SONIC_PISTOL_UFOPEDIA: "聲波手槍是基於超聲波音波的外星武器，可在幾秒內將骨頭液化。其超聲波頻率超出人類聽力範圍。"
-  STR_PISTOL_POWER_CLIP_UFOPEDIA: "緊湊型外星聲波手槍的動力源，內含 Z 元素 — 所有外星能量的來源。"
+  STR_SONIC_CANNON_UFOPEDIA: "音波加農是音波武器家族中最強的型號，配備高頻聽覺震盪器與比爆裂步槍更大的共鳴腔，並具備脈衝引爆系統，可調變超音波以產生更有效的音波震懾。"
+  STR_CANNON_POWER_CLIP_UFOPEDIA: "這款緊湊裝置作為音波加農的彈藥使用，內含少量 Z 元素。"
+  STR_SONIC_BLASTA_RIFLE_UFOPEDIA: "更強力的音波裝置，連高碳鋼也無法對其免疫。高度緊湊的波形發射器配備超導放大器以增強威力。"
+  STR_BLASTA_POWER_CLIP_UFOPEDIA: "這款小型物件作為音波步槍的動力源，是一款強力的外星武器，內含少量 Z 元素。"
+  STR_SONIC_PISTOL_UFOPEDIA: "音波手槍是基於超音波音波的外星武器，可在幾秒內將骨頭液化。其超音波頻率超出人類聽力範圍。"
+  STR_PISTOL_POWER_CLIP_UFOPEDIA: "緊湊型外星音波手槍的動力源，內含 Z 元素 — 所有外星能量的來源。"
   STR_DISRUPTOR_PULSE_LAUNCHER_UFOPEDIA: "本款外星武器僅可水中使用，發射自走式「干擾脈衝彈」。點選射擊時可為彈頭設定路徑點，配置足夠路徑點後點選發射圖示即可。"
   STR_DISRUPTOR_AMMO_UFOPEDIA: "本裝置為配備機載電腦導引系統的干擾脈衝彈，由干擾脈衝發射器發射。"
   STR_THERMAL_SHOK_LAUNCHER_UFOPEDIA: "小型熱擊發射器，發射化學凍結彈，非常適合用於捕捉活外星人。"
   STR_THERMAL_SHOK_BOMB_UFOPEDIA: "熱擊彈用於捕捉活人，也可用於大多數外星種族，需以熱擊發射器發射。"
-  STR_SONIC_PULSER_UFOPEDIA: "本裝置運作方式與標準手榴彈相同，但威力強大數倍。手榴彈使用單一脈衝聲波爆裂，向四面八方同時發出。"
+  STR_SONIC_PULSER_UFOPEDIA: "本裝置運作方式與標準手榴彈相同，但威力強大數倍。手榴彈使用單一脈衝音波爆裂，向四面八方同時發出。"
 
   # 裝甲
   STR_PLASTIC_AQUA_ARMOR_UFOPEDIA: "本裝甲採用新發現的外星物質「水中塑膠」，使我方水兵在面對外星侵略時有一搏之力。"
@@ -1018,7 +1018,7 @@ zh-TW:
 
   # === 兵種 / 屍體 autopsy 名稱 ===
   STR_AQUATOID_AUTOPSY: "水族人解剖"
-  STR_GILLMAN_AUTOPSY: "魚鰓人解剖"
+  STR_GILLMAN_AUTOPSY: "鰓型人解剖"
   STR_LOBSTERMAN_AUTOPSY: "龍蝦人解剖"
   STR_TASOTH_AUTOPSY: "塔索斯解剖"
   STR_DEEP_ONE_AUTOPSY: "深淵者解剖"
@@ -1072,16 +1072,16 @@ zh-TW:
   # === 物種 UFOPEDIA — 主要敵人介紹 + 解剖 ===
   STR_AQUATOID_UFOPEDIA: "水族人是一個古老的種族，遠在人類踏出最初顫顫巍巍的第一步前數千年便已存在。其矮小緊湊的身形與球狀特徵，可追溯至牠們在宇宙中漫遊的兄弟—腦蟲人。其力量基於強大的分子控制科技。水族人試圖透過基因改造延續其無法自然繁衍的種族，理想的實驗對象正是人類。實驗已誕生了眾多混血種族。"
   STR_AQUATOID_AUTOPSY_UFOPEDIA: "對此生物的詳細分析讓我們得以提出若干基本假設。牠正是我們昔日的敵人—腦蟲人，但已被外科手段與植入物改造為水生生物。退化的肺部允許其呼吸空氣，並具備有限的水面活動能力。全身遍布電子植入物，強化了萎縮肢體的力量與器官的機能。由於該族群所有個體完全相同，我們可推測這些生物乃是複製體。"
-  STR_GILLMAN_UFOPEDIA: "近乎人類的奇異生物，看似爬蟲類人形，與人類關係極為緊密。這種生物在水下世界中極為強悍迅捷。魚鰓人是個完整的種族，具有不同年齡的雄性與雌性個體。牠們與多數水下外星生物截然不同—身上完全沒有基因改造或外科變形的痕跡。我們所看到的，或許正是我們自身物種的某個古老分支。"
-  STR_GILLMAN_AUTOPSY_UFOPEDIA: "手術一開始便清楚顯示：這並非外星人，而是地球本土生物—一個古老的史前種族，曾被認為在哺乳類取得主宰地位的那一刻便已滅絕。在恐龍橫行大地的時代，這些生物—魚鰓人—已然存活：兩棲、智慧、強壯。終結爬蟲類統治本星的那場浩劫，迫使這些生物與新到的外星人形成共生關係。一個小型電子裝置嵌於牠們的顱骨之中。"
+  STR_GILLMAN_UFOPEDIA: "近乎人類的奇異生物，看似爬蟲類人形，與人類關係極為緊密。這種生物在水下世界中極為強悍迅捷。鰓型人是個完整的種族，具有不同年齡的雄性與雌性個體。牠們與多數水下外星生物截然不同—身上完全沒有基因改造或外科變形的痕跡。我們所看到的，或許正是我們自身物種的某個古老分支。"
+  STR_GILLMAN_AUTOPSY_UFOPEDIA: "手術一開始便清楚顯示：這並非外星人，而是地球本土生物—一個古老的史前種族，曾被認為在哺乳類取得主宰地位的那一刻便已滅絕。在恐龍橫行大地的時代，這些生物—鰓型人—已然存活：兩棲、智慧、強壯。終結爬蟲類統治本星的那場浩劫，迫使這些生物與新到的外星人形成共生關係。一個小型電子裝置嵌於牠們的顱骨之中。"
   STR_LOBSTERMAN_UFOPEDIA: "這是一個令人震驚的生物，比人類更高大，擁有六肢，外型猶如水中惡魔。此生物與地球龍蝦的相似性，使其在 X-Com 部隊中被戲稱為「龍蝦人」。這是深淵中的巨獸—一個被精心設計的戰鬥生物，力量驚人，幾乎對火器免疫。光是牠的鉗子就足以碾碎鋼鐵。"
   STR_LOBSTERMAN_AUTOPSY_UFOPEDIA: "突破其幾乎不可破壞的外殼後，此生物的構造令人驚嘆。強大的肌肉繞著一副堅硬合金骨架起伏，一個具備多波段掃描能力的精密目標瞄準系統直接連入生物的腦部。複眼受到比鋼還硬的塑料保護。顯然當這些生物由其主人妥善部署時，幾乎無人能擋。其體內深處埋藏著結構與功能皆未知的裝置。"
   STR_TASOTH_UFOPEDIA: "這些敏捷迅速的敵人是外星大軍的主力。數以百計的個體在外星殖民地深處的巨大繁殖槽中誕生。塔索斯的力量遠勝人類，是真正的外星生物—其行為與肉食天性在本星球上無可匹敵。塔索斯常擔任外星攻擊的先鋒，即使面對壓倒性的劣勢，似乎也從不退縮。"
   STR_TASOTH_AUTOPSY_UFOPEDIA: "解剖揭示這是一種具備奇異力量的電子生物有機體。體腔內有一個小型動力單元，但找不出任何可辨識的器官。能量透過生物電傳輸系統散布全身。整個軀體缺少骨骼或任何支撐結構。一旦死亡，能量便會停止，生物便化為一團毫無生氣、滲漏外星血肉與液體的破布娃娃。體內唯一的其他構造是一對陶瓷電池—若短暫通電，可使生物短暫復甦。"
   STR_DEEP_ONE_UFOPEDIA: "深淵者是一場生物學的噩夢—一個混種生物，由水族人的扭曲心智實驗所製造。我們曾遭遇此生物的數種變異。經廣泛研究後，我們認定這些是入侵者所製造的—在獲得新鮮人類樣本後用以擴充其陣容。每隻這種次人類都配備了威力足以擊殺一名水兵的電擊放電能力。"
   STR_DEEP_ONE_AUTOPSY_UFOPEDIA: "此生物是人類與外星有機體的嫁接產物。人類大腦被大規模改造，以容納控制電子設備與外星皮質。人類軀體的所有殘跡似乎都已消失，唯獨保留了一項：雙眼。外科嫁接似乎允許外星胎兒在成長過程中吞噬其人類宿主。此生物堅韌的皮膚似乎是一種非有機的金屬網—極為強韌且具彈性。其產生的混種強壯、迅捷，且完全受外星人控制。"
-  STR_BIODRONE_UFOPEDIA: "生物無人機是唯有外星心智才能構想出的造物。它是一個大腦（人類或外星人），懸浮於羊水之中，連接至一個動力基座，可於陸地或水下飛行。每架生物無人機皆配備強大的聲波擾亂器，半機械半生物。我方部分科學家推測此武器可能是由宿主原有的聲帶所驅動。這些「超級看門狗」精準而頑強，外星人廣泛使用牠們來保護重要資產。"
-  STR_BIODRONE_AUTOPSY_UFOPEDIA: "「聲波擾亂器是生物裝置」的假設已獲證實—這個不幸的生物字面意義上是用尖叫殺死敵人。每一個樣本都有大規模的外科手術創傷疤痕，並嚴重殘缺。外星人似乎是用屠宰的方式逼迫大腦服從。用於這些生物的皮質大多源於外星，但沒什麼比發現一具以人類為基底的個體更令人毛骨悚然。生物無人機由離子引擎驅動，並內建某種遠端遙控系統。"
+  STR_BIODRONE_UFOPEDIA: "生物無人機是唯有外星心智才能構想出的造物。它是一個大腦（人類或外星人），懸浮於羊水之中，連接至一個動力基座，可於陸地或水下飛行。每架生物無人機皆配備強大的音波擾亂器，半機械半生物。我方部分科學家推測此武器可能是由宿主原有的聲帶所驅動。這些「超級看門狗」精準而頑強，外星人廣泛使用牠們來保護重要資產。"
+  STR_BIODRONE_AUTOPSY_UFOPEDIA: "「音波擾亂器是生物裝置」的假設已獲證實—這個不幸的生物字面意義上是用尖叫殺死敵人。每一個樣本都有大規模的外科手術創傷疤痕，並嚴重殘缺。外星人似乎是用屠宰的方式逼迫大腦服從。用於這些生物的皮質大多源於外星，但沒什麼比發現一具以人類為基底的個體更令人毛骨悚然。生物無人機由離子引擎驅動，並內建某種遠端遙控系統。"
   STR_TENTACULAT_UFOPEDIA: "即使是洛夫克拉夫特噩夢的深淵也孕育不出這般難以言喻的生物。地球上任何動物都無法與之相比，能誕生此物的環境超乎想像。觸鬚人以長觸手裝備，能麻痺受害者並將其轉化為無心智的爪牙。這些後代僅憑碰觸便能致死，連護甲也無法阻擋。觸鬚人是 X-Com 至今所遭遇最令人畏懼的外星生物。"
   STR_TENTACULAT_AUTOPSY_UFOPEDIA: "解剖揭示其碩大的大腦中嵌入了小型電子植入物。其視覺系統是可見光與熱影像獲取的複雜組合—即使在墨黑的深海中，此怪物也能精準導航。體內存在著退化的器官，似乎僅能維持最低限度的生存。每隻生物都有一個小型胃囊，並接有一個外部連接器，合理推斷此生物由其主人直接以營養素供給。"
   STR_CALCINITE_UFOPEDIA: "如同失蹤水手的潛水服一般，這些外星生物潛伏於海床上獵捕粗心之人。其比鋼還強的爪子一擊揮砍，便足以將最優秀的潛水員送入海底。在面罩內可見一團綠色膠狀物在翻攪。我們多次與牠們致命的接觸中，從未得以一窺其真實形貌。"
@@ -1090,13 +1090,13 @@ zh-TW:
   STR_TRISCENE_AUTOPSY_UFOPEDIA: "經科學家解剖後，三角龍顯示自己是一個古老的生物，被電子植入物與武器系統所增強。其微小的大腦由控制束帶上裝載的小型電腦模組輔助—所有此類生物皆配戴。堅韌的天然皮膚，加上由額外武器增強的掠食本能，使其在任何環境下都是致命的對手。"
   STR_HALLUCINOID_UFOPEDIA: "在收割了海洋之後，外星人培育出這些巨大的地球生物作為武器。當面對這些看似無害的深海漫遊者時，切勿被虛假的安全感所麻痺。具備近戰冰寒打擊能力的幻象生物是個致命的敵人。"
   STR_HALLUCINOID_AUTOPSY_UFOPEDIA: "在此生物膠狀軀體的多層之中，嵌套著一個強大的化學冷凍裝置，這便是其主要的攻擊能力。幻象生物柔軟有彈性的皮膚似乎對火焰攻擊極為脆弱。此突變體常與其主人—水族人—一同出沒。"
-  STR_XARQUID_UFOPEDIA: "另一種經改造的地球無脊椎動物，薩奎是一個既美麗又危險的生物。這個迅速游動的龐然大物隱藏著毀滅性的武器庫—令人窒息的墨汁噴霧，以及離子化粒子衝擊波。自我們初次與此強大生物接觸以來，便對其威力及其控制者—復仇心切的魚鰓人—保持戒心。"
-  STR_XARQUID_AUTOPSY_UFOPEDIA: "這隻過度發育的鸚鵡螺，是靠外星藥物與外科改造的「食譜」變得如此巨大。已被扭曲到超出自然範疇之外，魚鰓人為此生物加裝了機械控制系統，如今原本的天性已蕩然無存。作為一個有機武器平台部署，薩奎堅韌的外殼與機動性使其成為強大的對手。"
+  STR_XARQUID_UFOPEDIA: "另一種經改造的地球無脊椎動物，薩奎是一個既美麗又危險的生物。這個迅速游動的龐然大物隱藏著毀滅性的武器庫—令人窒息的墨汁噴霧，以及離子化粒子衝擊波。自我們初次與此強大生物接觸以來，便對其威力及其控制者—復仇心切的鰓型人—保持戒心。"
+  STR_XARQUID_AUTOPSY_UFOPEDIA: "這隻過度發育的鸚鵡螺，是靠外星藥物與外科改造的「食譜」變得如此巨大。已被扭曲到超出自然範疇之外，鰓型人為此生物加裝了機械控制系統，如今原本的天性已蕩然無存。作為一個有機武器平台部署，薩奎堅韌的外殼與機動性使其成為強大的對手。"
 
   # ============================================================
   # Batch v2.18 Final — 補譯 211 條 (auto-resume)
   # 涵蓋: UI / 訊息 / 戰鬥事件 / 種族 / 武器 / 城市 / 過場 / UFOPEDIA
-  # 譯名規範: DEEP ONE=深淵者; SONIC=聲波; CALCINITE=鈣化體;
+  # 譯名規範: DEEP ONE=深淵者; SONIC=音波; CALCINITE=鈣化體;
   # AQUATOID=水族人; TENTACULAT=觸鬚人; SUB PEN=潛艇修理塢
   # ============================================================
 
@@ -1114,7 +1114,7 @@ zh-TW:
   TENTACULAT_WEAPON: "觸鬚人武器"
   XARQUID_WEAPON: "薩奎武器"
   ZOMBIE_WEAPON: "活屍武器"
-  STR_TRIBIO_SONIC_WEAPON: "外星聲波武器"
+  STR_TRIBIO_SONIC_WEAPON: "外星音波武器"
 
   # === 兵種 — AQUATOID / GILLMAN / LOBSTERMAN / TASOTH 階級 (16 條) ===
   STR_AQUATOID_COMMANDER: "水族人指揮官"
@@ -1123,10 +1123,10 @@ zh-TW:
   STR_AQUATOID_TECHNICIAN: "水族人技師"
   STR_AQUATOID_SQUAD_LEADER: "水族人班長"
   STR_AQUATOID_SOLDIER: "水族人士兵"
-  STR_GILLMAN_COMMANDER: "魚鰓人指揮官"
-  STR_GILLMAN_TECHNICIAN: "魚鰓人技師"
-  STR_GILLMAN_SQUAD_LEADER: "魚鰓人班長"
-  STR_GILLMAN_SOLDIER: "魚鰓人士兵"
+  STR_GILLMAN_COMMANDER: "鰓型人指揮官"
+  STR_GILLMAN_TECHNICIAN: "鰓型人技師"
+  STR_GILLMAN_SQUAD_LEADER: "鰓型人班長"
+  STR_GILLMAN_SOLDIER: "鰓型人士兵"
   STR_LOBSTERMAN_COMMANDER: "龍蝦人指揮官"
   STR_LOBSTERMAN_NAVIGATOR: "龍蝦人領航員"
   STR_LOBSTERMAN_TECHNICIAN: "龍蝦人技師"
@@ -1350,7 +1350,7 @@ zh-TW:
   STR_COELACANTH_GAS_CANNON_UFOPEDIA: "自動化 SWS 機動性與船殼強度俱佳，可於各深度提供重型部隊支援。若彈藥充足，SWS 將自動補充彈藥。"
   STR_COELACANTH_AQUA_JET_UFOPEDIA: "本潛航器配備水噴流魚雷。本武器系統僅可於水下運作。請確保儲備充足的水噴流魚雷。"
   STR_COELACANTH_GAUSS_UFOPEDIA: "高斯科技為 SWS 提供強大的武器系統。相較先前型號火力大增，並運用 X-Com 專利科技。"
-  STR_DISPLACER_SONIC_UFOPEDIA: "外星科技重新定義了 SWS。運用離子位移器使 SWS 不再受限於陸地/海床。聲波武器則為戰鬥提供決定性的優勢。"
+  STR_DISPLACER_SONIC_UFOPEDIA: "外星科技重新定義了 SWS。運用離子位移器使 SWS 不再受限於陸地/海床。音波武器則為戰鬥提供決定性的優勢。"
   STR_DISPLACER_PWT_UFOPEDIA: "本 SWS 配備脈波武器供水中使用。您必須生產 PWT 才能保持滿載。發射時，選擇若干「路徑點」後點選發射圖示即可。"
   STR_ALIEN_INTERDICTION_UFOPEDIA: "外星人會封鎖其感興趣的區域，派出載具明確以鎖定區域為目的，為後續更密集的任務鋪路。它們將降落於日後預定突襲的特定地點，封鎖該區並準備迎接下階段的活動。"
   STR_ALIEN_RESOURCE_RAID_UFOPEDIA: "擊沉船隻與擊落飛行器是外星策略的關鍵要素。物資的取得是外星人首要活動之一，因此與這些公然的侵略行為密切相關。外星人也突襲地熱活動區、礦場、古蹟，掠奪礦物、精煉金屬與其他人類製品。"
