@@ -47,28 +47,54 @@ jobs:
       - name: Install build dependencies (Homebrew)
         run: |
           brew update
-          # SDL 1.2 EOL since 2012; modern macOS uses sdl12-compat shim (SDL2 提供 1.2 API binary compat).
-          # SDL_image/mixer/gfx 1.x 已被 Homebrew 從 main 移除 → 用 SDL2 版本（headers C API 跟 1.x 幾乎相同）。
-          brew install cmake pkg-config yaml-cpp dylibbundler
-          brew install sdl12-compat sdl2_image sdl2_mixer sdl2_gfx
+          # Homebrew 從 main 移除了 SDL 1.2 image/mixer/gfx → 下方 build from source
+          brew install cmake pkg-config yaml-cpp dylibbundler libpng libjpeg libtiff
+          brew install sdl12-compat
+          brew list --versions cmake yaml-cpp sdl12-compat
 
-          # 建立 SDL_image / SDL_mixer / SDL_gfx symlinks 給 OpenXcom CMakeLists 找 (預期 SDL 1.2 命名)
-          BREW_PREFIX="$(brew --prefix)"
-          for lib in image mixer gfx; do
-            # symlink 標頭：SDL2_${lib}.h → SDL_${lib}.h
-            ln -sf "$BREW_PREFIX/include/SDL2/SDL_${lib}.h" "$BREW_PREFIX/include/SDL/SDL_${lib}.h" 2>/dev/null || true
-          done
+      - name: Build SDL 1.2 image/mixer/gfx from source
+        run: |
+          set -e
+          PREFIX="$(brew --prefix)"
+          mkdir -p /tmp/sdl_build && cd /tmp/sdl_build
 
-          # 顯示版本資訊
-          brew list --versions cmake yaml-cpp sdl12-compat sdl2_image sdl2_mixer sdl2_gfx
+          # SDL_image 1.2.12
+          curl -fsSL https://www.libsdl.org/projects/SDL_image/release/SDL_image-1.2.12.tar.gz -o sdl_image.tgz
+          tar xzf sdl_image.tgz && cd SDL_image-1.2.12
+          ./configure --prefix="$PREFIX" --with-sdl-prefix="$PREFIX" \
+            --disable-jpg-shared --disable-png-shared --disable-tif-shared \
+            --disable-webp --disable-jxl
+          make -j$(sysctl -n hw.ncpu) && make install
+          cd ..
+
+          # SDL_mixer 1.2.12
+          curl -fsSL https://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.12.tar.gz -o sdl_mixer.tgz
+          tar xzf sdl_mixer.tgz && cd SDL_mixer-1.2.12
+          ./configure --prefix="$PREFIX" --with-sdl-prefix="$PREFIX" \
+            --disable-music-mp3 --disable-music-mod \
+            --disable-music-flac --disable-music-fluidsynth-midi
+          make -j$(sysctl -n hw.ncpu) && make install
+          cd ..
+
+          # SDL_gfx 2.0.26
+          curl -fsSL https://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-2.0.26.tar.gz -o sdl_gfx.tgz
+          tar xzf sdl_gfx.tgz && cd SDL_gfx-2.0.26
+          ./configure --prefix="$PREFIX" --with-sdl-prefix="$PREFIX" --disable-mmx
+          make -j$(sysctl -n hw.ncpu) && make install
+          cd ..
+
+          # 驗證
+          ls -la "$PREFIX/lib/libSDL_image.dylib" "$PREFIX/lib/libSDL_mixer.dylib" "$PREFIX/lib/libSDL_gfx.dylib"
 
       - name: Configure cmake (Universal Binary)
         run: |
           cd $GITHUB_WORKSPACE/openxcom-src
           mkdir -p build && cd build
+          # 暫時 arm64-only (SDL 1.2 from source autoconf 不支援 universal lipo)
+          # Intel Mac 用戶可透過 Rosetta 2 100% 相容執行
           cmake -G "Unix Makefiles" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+            -DCMAKE_OSX_ARCHITECTURES="arm64" \
             -DCMAKE_OSX_DEPLOYMENT_TARGET="11.0" \
             ..
 
