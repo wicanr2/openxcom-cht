@@ -92,10 +92,14 @@ jobs:
           mkdir -p build && cd build
           # 暫時 arm64-only (SDL 1.2 from source autoconf 不支援 universal lipo)
           # Intel Mac 用戶可透過 Rosetta 2 100% 相容執行
+          # Xcode 15.4 Clang 預設 C++20+，OpenXcom 用了已移除的 std::unary_function → force C++14
           cmake -G "Unix Makefiles" \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_OSX_ARCHITECTURES="arm64" \
             -DCMAKE_OSX_DEPLOYMENT_TARGET="11.0" \
+            -DCMAKE_CXX_STANDARD=14 \
+            -DCMAKE_CXX_EXTENSIONS=OFF \
+            -DCMAKE_CXX_FLAGS="-Wno-deprecated-declarations" \
             ..
 
       - name: Build openxcom (Universal Binary)
