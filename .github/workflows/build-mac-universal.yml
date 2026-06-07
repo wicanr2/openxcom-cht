@@ -44,13 +44,15 @@ jobs:
           cp openxcom-cht/bin/standard/xcom2/Language/zh-TW.yml openxcom-src/bin/standard/xcom2/Language/
           cp -r openxcom-cht/bin/common/SoldierName openxcom-src/bin/common/
 
-      - name: Install build dependencies (Homebrew)
+      - name: Install build dependencies (Homebrew + pip)
         run: |
           brew update
           # Homebrew 從 main 移除了 SDL 1.2 image/mixer/gfx → 下方 build from source
           brew install cmake pkg-config yaml-cpp dylibbundler libpng libjpeg libtiff
           brew install sdl12-compat
           brew list --versions cmake yaml-cpp sdl12-compat
+          # PIL/Pillow 用來生成 icon (chibi signature → icns)
+          python3 -m pip install --break-system-packages Pillow || python3 -m pip install --user Pillow
 
       - name: Build SDL 1.2 image/mixer/gfx from source
         run: |
