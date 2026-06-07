@@ -102,27 +102,26 @@ jobs:
             -DCMAKE_CXX_FLAGS="-Wno-deprecated-declarations" \
             ..
 
-      - name: Build openxcom (Universal Binary)
+      - name: Build openxcom (.app bundle already produced by upstream CMake)
         run: |
           cd $GITHUB_WORKSPACE/openxcom-src/build
           make openxcom -j$(sysctl -n hw.ncpu)
-          # Verify it's actually universal
-          lipo -info bin/openxcom
+          # OpenXcom CMake 直接產 openxcom.app (BundleUtilities 已 inject dylibs)
+          ls -la openxcom.app/Contents/MacOS/openxcom
+          lipo -info openxcom.app/Contents/MacOS/openxcom
+          echo "=== openxcom.app 結構 ==="
+          find openxcom.app -maxdepth 3 -type d
 
       - name: Build .app bundle (UFO variant)
         run: |
           cd $GITHUB_WORKSPACE
           APP="OpenXcom-CHT-UFO.app"
-          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+          rm -rf "$APP"
 
-          cp openxcom-src/build/bin/openxcom "$APP/Contents/MacOS/openxcom"
+          # 用 upstream 已 build 好的 openxcom.app 為基底（dylibs 已 bundled）
+          cp -R openxcom-src/build/openxcom.app "$APP"
 
-          # Bundle dylibs via dylibbundler (cleaner than ldd-style)
-          brew install dylibbundler
-          dylibbundler -od -b -x "$APP/Contents/MacOS/openxcom" \
-            -d "$APP/Contents/libs/" -p "@executable_path/../libs/"
-
-          # Resources: game data
+          # 加遊戲資料到 Resources/data/
           mkdir -p "$APP/Contents/Resources/data"
           cp -r openxcom-src/bin/common   "$APP/Contents/Resources/data/"
           cp -r openxcom-src/bin/standard "$APP/Contents/Resources/data/"
