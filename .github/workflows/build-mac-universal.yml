@@ -47,7 +47,20 @@ jobs:
       - name: Install build dependencies (Homebrew)
         run: |
           brew update
-          brew install cmake sdl12-compat sdl_image sdl_mixer sdl_gfx yaml-cpp
+          # SDL 1.2 EOL since 2012; modern macOS uses sdl12-compat shim (SDL2 提供 1.2 API binary compat).
+          # SDL_image/mixer/gfx 1.x 已被 Homebrew 從 main 移除 → 用 SDL2 版本（headers C API 跟 1.x 幾乎相同）。
+          brew install cmake pkg-config yaml-cpp dylibbundler
+          brew install sdl12-compat sdl2_image sdl2_mixer sdl2_gfx
+
+          # 建立 SDL_image / SDL_mixer / SDL_gfx symlinks 給 OpenXcom CMakeLists 找 (預期 SDL 1.2 命名)
+          BREW_PREFIX="$(brew --prefix)"
+          for lib in image mixer gfx; do
+            # symlink 標頭：SDL2_${lib}.h → SDL_${lib}.h
+            ln -sf "$BREW_PREFIX/include/SDL2/SDL_${lib}.h" "$BREW_PREFIX/include/SDL/SDL_${lib}.h" 2>/dev/null || true
+          done
+
+          # 顯示版本資訊
+          brew list --versions cmake yaml-cpp sdl12-compat sdl2_image sdl2_mixer sdl2_gfx
 
       - name: Configure cmake (Universal Binary)
         run: |
