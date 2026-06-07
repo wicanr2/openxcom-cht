@@ -217,15 +217,20 @@ jobs:
           /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName 'OpenXcom 繁中 (TFTD)'" "$APP_TFTD/Contents/Info.plist"
           /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier 'com.wicanr2.openxcom-cht.tftd'" "$APP_TFTD/Contents/Info.plist"
 
-      - name: Create DMG packages
+      - name: Create DMG + .tar.gz packages
         run: |
           cd $GITHUB_WORKSPACE
           for variant in UFO TFTD; do
             APP="OpenXcom-CHT-$variant.app"
             DMG="OpenXcom-CHT-v2.29-$variant-universal.dmg"
+            TAR="OpenXcom-CHT-v2.29-$variant-mac.tar.gz"
+            # DMG (macOS native, Gatekeeper friendly)
             hdiutil create -volname "OpenXcom-CHT-$variant" -srcfolder "$APP" \
               -ov -format UDZO "$DMG"
+            # .tar.gz (cross-platform extract，方便 Windows 端注入遊戲資料)
+            tar czf "$TAR" "$APP"
             echo "Built: $DMG ($(du -h "$DMG" | cut -f1))"
+            echo "Built: $TAR ($(du -h "$TAR" | cut -f1))"
           done
 
       - name: Upload artifacts
@@ -235,6 +240,8 @@ jobs:
           path: |
             OpenXcom-CHT-v2.29-UFO-universal.dmg
             OpenXcom-CHT-v2.29-TFTD-universal.dmg
+            OpenXcom-CHT-v2.29-UFO-mac.tar.gz
+            OpenXcom-CHT-v2.29-TFTD-mac.tar.gz
           retention-days: 90
 
       - name: Release (if tagged)
