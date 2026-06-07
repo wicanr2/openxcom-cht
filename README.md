@@ -95,8 +95,11 @@
 
 | 平台 | UFO（一代地表）| TFTD（二代深海）|
 |---|---|---|
-| **Windows 10/11 64-bit** | `OpenXcom-CHT-v2.20-UFO-portable.zip` 8.1 MB | `OpenXcom-CHT-v2.20-TFTD-portable.zip` 37 MB |
-| **Linux x86_64** | `OpenXcom-CHT-v2.20-UFO-x86_64.AppImage` 16 MB | `OpenXcom-CHT-v2.20-TFTD-x86_64.AppImage` 45 MB |
+| **Windows 10/11 64-bit** | `OpenXcom-CHT-v2.29-UFO-portable.zip` 8.1 MB | `OpenXcom-CHT-v2.29-TFTD-portable.zip` 37 MB |
+| **Linux x86_64** | `OpenXcom-CHT-v2.29-UFO-x86_64.AppImage` 16 MB | `OpenXcom-CHT-v2.29-TFTD-x86_64.AppImage` 45 MB |
+| **macOS Universal**（arm64 + x86_64）| `OpenXcom-CHT-v2.29-UFO-universal.dmg` | `OpenXcom-CHT-v2.29-TFTD-universal.dmg` |
+
+> 🍎 **Mac 版本說明**：DMG 是 Universal Binary（一個檔同時支援 Apple Silicon M1/M2/M3/M4 + Intel Mac）。GitHub Actions 自動 build（[`.github/workflows/build-mac-universal.yml`](.github/workflows/build-mac-universal.yml)），手動觸發或推 `v*-mac` tag 即啟動 — 因為 Mac .app 與 .dmg 需要 macOS host 製作（Apple SDK 限制），不能從 Windows 跨平台 build。下載方式：到 [Actions 頁面](https://github.com/wicanr2/openxcom-cht/actions/workflows/build-mac-universal.yml)抓 artifact，或從 [Releases](https://github.com/wicanr2/openxcom-cht/releases) 抓 tagged 版本。
 
 **為何拆成 4 包？** 已知 OpenXcom 在 runtime 切換 mod (xcom1 ↔ xcom2) 會 crash — 每包只含一作對應遊戲資料 + 預設 active mod，避免使用者誤切。
 

@@ -1,0 +1,202 @@
+name: Build macOS Universal (arm64 + x86_64)
+
+# Builds an OpenXcom .app bundle as a Universal Binary
+# Triggered manually or on git tag push (e.g. v2.30)
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*-mac'
+
+jobs:
+  build:
+    runs-on: macos-14  # Apple Silicon runner (arm64 host)
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout openxcom-cht (this repo)
+        uses: actions/checkout@v4
+        with:
+          path: openxcom-cht
+
+      - name: Checkout OpenXcom upstream
+        uses: actions/checkout@v4
+        with:
+          repository: OpenXcom/OpenXcom
+          ref: master
+          path: openxcom-src
+
+      - name: Apply CHT source patches
+        run: |
+          cd $GITHUB_WORKSPACE
+          # Copy all patches/src/**/*.{cpp,h} → openxcom-src/src/
+          find openxcom-cht/patches/src -type f \( -name "*.cpp" -o -name "*.h" \) | while read f; do
+            rel="${f#openxcom-cht/patches/src/}"
+            cp "$f" "openxcom-src/src/$rel"
+            echo "patched: $rel"
+          done
+
+      - name: Copy CHT translations + fonts + signature
+        run: |
+          cd $GITHUB_WORKSPACE
+          cp -r openxcom-cht/bin/common   openxcom-src/bin/
+          cp openxcom-cht/bin/standard/xcom1/Language/zh-TW.yml openxcom-src/bin/standard/xcom1/Language/
+          cp openxcom-cht/bin/standard/xcom2/Language/zh-TW.yml openxcom-src/bin/standard/xcom2/Language/
+          cp -r openxcom-cht/bin/common/SoldierName openxcom-src/bin/common/
+
+      - name: Install build dependencies (Homebrew)
+        run: |
+          brew update
+          brew install cmake sdl12-compat sdl_image sdl_mixer sdl_gfx yaml-cpp
+
+      - name: Configure cmake (Universal Binary)
+        run: |
+          cd $GITHUB_WORKSPACE/openxcom-src
+          mkdir -p build && cd build
+          cmake -G "Unix Makefiles" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET="11.0" \
+            ..
+
+      - name: Build openxcom (Universal Binary)
+        run: |
+          cd $GITHUB_WORKSPACE/openxcom-src/build
+          make openxcom -j$(sysctl -n hw.ncpu)
+          # Verify it's actually universal
+          lipo -info bin/openxcom
+
+      - name: Build .app bundle (UFO variant)
+        run: |
+          cd $GITHUB_WORKSPACE
+          APP="OpenXcom-CHT-UFO.app"
+          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+
+          cp openxcom-src/build/bin/openxcom "$APP/Contents/MacOS/openxcom"
+
+          # Bundle dylibs via dylibbundler (cleaner than ldd-style)
+          brew install dylibbundler
+          dylibbundler -od -b -x "$APP/Contents/MacOS/openxcom" \
+            -d "$APP/Contents/libs/" -p "@executable_path/../libs/"
+
+          # Resources: game data
+          mkdir -p "$APP/Contents/Resources/data"
+          cp -r openxcom-src/bin/common   "$APP/Contents/Resources/data/"
+          cp -r openxcom-src/bin/standard "$APP/Contents/Resources/data/"
+          cp -r openxcom-src/bin/UFO      "$APP/Contents/Resources/data/"
+
+          # Icon (chibi signature scaled)
+          cd openxcom-cht
+          python3 -c "
+          from PIL import Image
+          src = Image.open('bin/common/Resources/signature_pang.png').convert('RGBA')
+          face = src.crop((0, 0, 24, 24))
+          face.resize((512, 512), Image.NEAREST).save('/tmp/icon.png')
+          "
+          cd $GITHUB_WORKSPACE
+          mkdir -p /tmp/iconset.iconset
+          for sz in 16 32 64 128 256 512; do
+            sips -z $sz $sz /tmp/icon.png --out /tmp/iconset.iconset/icon_${sz}x${sz}.png
+            sips -z $((sz*2)) $((sz*2)) /tmp/icon.png --out /tmp/iconset.iconset/icon_${sz}x${sz}@2x.png 2>/dev/null || true
+          done
+          iconutil -c icns /tmp/iconset.iconset -o "$APP/Contents/Resources/openxcom.icns"
+
+          # Info.plist
+          cat > "$APP/Contents/Info.plist" <<'PLIST'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>CFBundleExecutable</key><string>openxcom-launcher</string>
+            <key>CFBundleIconFile</key><string>openxcom.icns</string>
+            <key>CFBundleIdentifier</key><string>com.wicanr2.openxcom-cht.ufo</string>
+            <key>CFBundleName</key><string>OpenXcom CHT UFO</string>
+            <key>CFBundleDisplayName</key><string>OpenXcom 繁中 (UFO)</string>
+            <key>CFBundleVersion</key><string>2.29</string>
+            <key>CFBundlePackageType</key><string>APPL</string>
+            <key>LSMinimumSystemVersion</key><string>11.0</string>
+            <key>NSHighResolutionCapable</key><true/>
+          </dict>
+          </plist>
+          PLIST
+
+          # Launcher script that sets up portable user dir + active mod xcom1
+          cat > "$APP/Contents/MacOS/openxcom-launcher" <<'LAUNCH'
+          #!/bin/bash
+          HERE="$(dirname "$0")"
+          APP_ROOT="$(cd "$HERE/../.." && pwd)"
+          DATA="$APP_ROOT/Contents/Resources/data"
+          USER_DIR="${XDG_DATA_HOME:-$HOME/Library/Application Support}/openxcom-cht-UFO"
+          CFG_DIR="${XDG_CONFIG_HOME:-$HOME/Library/Preferences}/openxcom-cht-UFO"
+          mkdir -p "$USER_DIR" "$CFG_DIR"
+          if [ ! -f "$CFG_DIR/options.cfg" ]; then
+            cat > "$CFG_DIR/options.cfg" <<'CFG'
+          mods:
+            - active: true
+              id: xcom1
+          options:
+            language: zh-TW
+            displayWidth: 1280
+            displayHeight: 800
+            fullscreen: false
+            borderless: false
+            keepAspectRatio: true
+            useScaleFilter: false
+            useHQXFilter: false
+            useXBRZFilter: false
+            useOpenGL: false
+            soundVolume: 64
+            musicVolume: 64
+            uiVolume: 42
+            playIntro: true
+          CFG
+          fi
+          exec "$HERE/openxcom" -data "$DATA" -user "$USER_DIR" -config "$CFG_DIR" "$@"
+          LAUNCH
+          chmod +x "$APP/Contents/MacOS/openxcom-launcher"
+
+      - name: Build .app bundle (TFTD variant)
+        run: |
+          cd $GITHUB_WORKSPACE
+          # Reuse same EXE + libs + icon + plist; only swap data + launcher
+          APP_TFTD="OpenXcom-CHT-TFTD.app"
+          cp -R "OpenXcom-CHT-UFO.app" "$APP_TFTD"
+          # Remove UFO data, add TFTD
+          rm -rf "$APP_TFTD/Contents/Resources/data/UFO"
+          cp -r openxcom-src/bin/TFTD "$APP_TFTD/Contents/Resources/data/" || \
+            echo "WARNING: TFTD data not present in openxcom-src/bin/ - upstream master doesn't ship TFTD data"
+          # Patch launcher: xcom2 instead of xcom1
+          sed -i '' 's|openxcom-cht-UFO|openxcom-cht-TFTD|g; s|id: xcom1|id: xcom2|g' \
+            "$APP_TFTD/Contents/MacOS/openxcom-launcher"
+          # Update plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleName 'OpenXcom CHT TFTD'" "$APP_TFTD/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName 'OpenXcom 繁中 (TFTD)'" "$APP_TFTD/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier 'com.wicanr2.openxcom-cht.tftd'" "$APP_TFTD/Contents/Info.plist"
+
+      - name: Create DMG packages
+        run: |
+          cd $GITHUB_WORKSPACE
+          for variant in UFO TFTD; do
+            APP="OpenXcom-CHT-$variant.app"
+            DMG="OpenXcom-CHT-v2.29-$variant-universal.dmg"
+            hdiutil create -volname "OpenXcom-CHT-$variant" -srcfolder "$APP" \
+              -ov -format UDZO "$DMG"
+            echo "Built: $DMG ($(du -h "$DMG" | cut -f1))"
+          done
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenXcom-CHT-v2.29-mac-universal
+          path: |
+            OpenXcom-CHT-v2.29-UFO-universal.dmg
+            OpenXcom-CHT-v2.29-TFTD-universal.dmg
+          retention-days: 90
+
+      - name: Release (if tagged)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            OpenXcom-CHT-v2.29-UFO-universal.dmg
+            OpenXcom-CHT-v2.29-TFTD-universal.dmg
